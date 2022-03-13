@@ -1,5 +1,7 @@
+import "./productCard.css"
 import { cartSolid } from "../../assets/images/index";
 import { BiHeartFill, BiXLg } from "../../assets/icons/Icons";
+
 
 function ProductCard({
   imgSrc,
