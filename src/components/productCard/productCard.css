@@ -1,0 +1,7 @@
+.card{
+    justify-content: space-between;
+}
+
+.card > p{
+    font-weight: 500;
+}

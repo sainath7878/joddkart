@@ -1,0 +1,26 @@
+.brand-text {
+  font-family: "Merienda One", cursive;
+}
+
+.text-badge {
+  top: -1.2rem;
+  left: 1.2rem;
+  width: 2rem;
+  height: 2rem;
+  border: 2px solid var(--BACKGROUND-COLOR);
+}
+
+.hamburger {
+  background: transparent;
+  color: var(--SECONDARY-COLOR);
+}
+
+.hamburger:hover {
+  background-color: transparent;
+}
+
+@media only screen and (max-width: 600px) {
+  .nav-section > * {
+    margin-right: 5px;
+  }
+}
