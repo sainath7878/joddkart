@@ -1,0 +1,75 @@
+.hero {
+  background-image: url("../../assets/images/banner.jpg");
+  height: 50rem;
+  background-position: top center;
+  background-size: cover;
+  justify-content: flex-end;
+  margin-bottom: 10rem;
+}
+
+.banner {
+  width: 50%;
+}
+
+.banner-text {
+  color: var(--BACKGROUND-COLOR);
+  font-size: 4rem;
+  font-family: "Roboto", sans-serif;
+  line-height: 1.5;
+}
+
+.title-underline {
+  background-color: var(--SECONDARY-COLOR);
+  width: 10rem;
+  height: 3px;
+  margin: 2rem auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  padding: 1rem 5rem;
+}
+
+section {
+  margin-bottom: 5rem;
+}
+
+.card:hover {
+  box-shadow: 2px 2px 14px 3px var(--CARD-SHADOW-COLOR);
+}
+
+.underline {
+  border-bottom: 1px solid var(--SECONDARY-COLOR);
+}
+
+.underline:hover {
+  border-bottom: 3px solid var(--SECONDARY-COLOR);
+  color: var(--SECONDARY-COLOR);
+}
+
+.list-style-none {
+  list-style: none;
+}
+
+@media only screen and (max-width: 768px) {
+  .banner {
+    width: 50%;
+  }
+
+  .banner-text {
+    line-height: 1.2;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .hero {
+    background-position: bottom top;
+  }
+
+  .banner {
+    width: 60%;
+    line-height: 1;
+  }
+}
