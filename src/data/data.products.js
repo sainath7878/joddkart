@@ -1,8 +1,10 @@
 import { fps, fifa, openWorld, racing } from "../assets/images/index";
+import uuid from "react-uuid";
 
 
 const trendingProducts = [
     {
+        key: uuid(),
         name: "PUBG",
         imgSrc: fps,
         description:
@@ -14,6 +16,7 @@ const trendingProducts = [
         discount: 34,
     },
     {
+        key: uuid(),
         name: "FIFA",
         imgSrc: fifa,
         description:
@@ -25,6 +28,7 @@ const trendingProducts = [
         discount: 40,
     },
     {
+        key: uuid(),
         name: "Watch Dogs 2",
         imgSrc: openWorld,
         description:
@@ -36,6 +40,7 @@ const trendingProducts = [
         discount: 45,
     },
     {
+        key: uuid(),
         name: "Forza Horizon 3",
         imgSrc: racing,
         description:

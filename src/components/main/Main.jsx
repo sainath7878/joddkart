@@ -30,14 +30,16 @@ function Main() {
         <div className="grid">
           {trendingProducts.map(
             ({
+              key,
               imgSrc,
               name,
               description,
-              price:{originalPrice, discountedPrice},
-              discount
+              price: { originalPrice, discountedPrice },
+              discount,
             }) => {
               return (
                 <ProductCard
+                  id={key}
                   name={name}
                   imgSrc={imgSrc}
                   description={description}
