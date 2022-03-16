@@ -6,7 +6,7 @@ export const initialState = {
         categories: [],
         includeOutOfStock: false,
         rating: null,
-        priceRange: 1000
+        priceRange: "1000"
     }
 }
 

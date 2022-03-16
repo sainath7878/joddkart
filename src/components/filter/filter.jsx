@@ -161,7 +161,7 @@ function Filter() {
             max="5000"
             step="500"
             className="input-slider"
-            checked={state.filters.priceRange}
+            value={state.filters.priceRange}
             onChange={(e) =>
               dispatch({ type: "PRICE_RANGE", payload: e.target.value })
             }
