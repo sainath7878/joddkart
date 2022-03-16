@@ -1,16 +1,19 @@
-import uuid from "react-uuid";
 import "./categoryCard.css";
-
-import { fps, fifa, openWorld, racing } from "../../../assets/images/index";
-
-const categories = [
-  { key: uuid(), name: "FPS", imgSrc: fps },
-  { key: uuid(), name: "Racing", imgSrc: racing },
-  { key: uuid(), name: "Open World", imgSrc: openWorld },
-  { key: uuid(), name: "Fifa", imgSrc: fifa },
-];
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 function CategoryCard() {
+  const [categories, setCategories] = useState([]);
+  useEffect(() => {
+    (async function () {
+      try {
+        const { data } = await axios.get("/api/categories");
+        setCategories(data.categories);
+      } catch (err) {
+        console.log(err);
+      }
+    })();
+  }, []);
   return categories.map((item) => {
     return (
       <div key={item.key} className="card-vertical">

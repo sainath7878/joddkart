@@ -1,7 +1,15 @@
 @import "https://jodd-component-css.netlify.app/main.css";
 
+:root{
+  --SIDE-NAVBAR-COLOR: #e5e7eb;
+}
+
 a {
   color: var(--PRIMARY-COLOR);
+}
+
+.btn:disabled{
+  cursor: not-allowed;
 }
 
 @media only screen and (max-width: 600px) {

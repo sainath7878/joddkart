@@ -1,6 +1,6 @@
 import "./productCard.css";
 import { cartSolid } from "../../assets/images/index";
-import { BiHeartFill, BiXLg } from "../../assets/icons/Icons";
+import { BiHeartFill, BiXLg, BiStarFill } from "../../assets/icons/Icons";
 
 function ProductCard({
   imgSrc,
@@ -12,6 +12,8 @@ function ProductCard({
   wishlist,
   dismiss,
   badge,
+  rating,
+  inStock
 }) {
   return (
     <div className="card">
@@ -22,10 +24,25 @@ function ProductCard({
         <del>₹{originalPrice}</del> <span>₹{discountedPrice}</span>
         <span className="discount"> {discount}%</span>
       </p>
+      <p className="d-flex align-center fs-s rating">
+        {rating}
+        <BiStarFill />
+      </p>
       <div className="cta-container d-flex align-center">
-        <button className="btn btn-secondary d-flex-center">
-          <img src={cartSolid} alt="cart" className="btn-icon" /> Add to Cart
-        </button>
+        {inStock ? (
+          <button className="btn btn-secondary d-flex-center">
+            <img src={cartSolid} alt="cart" className="btn-icon" /> Add to Cart
+          </button>
+        ) : (
+          <button className="btn btn-secondary d-flex-center" disabled>
+            <img
+              src={cartSolid}
+              alt="cart"
+              className="btn-icon "
+            />{" "}
+            Out Of Stock
+          </button>
+        )}
       </div>
       <button className="card-btn-dismiss">
         {wishlist && <BiHeartFill className="fs-m" />}

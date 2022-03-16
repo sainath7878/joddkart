@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import "./header.css";
 
@@ -22,16 +23,21 @@ function Header() {
               JODD<span className="brand-text">Kart</span>
             </a>
             <ul className="d-inline-block d-flex align-center">
-              <li className="d-inline-block fs-s mr-sm">
-                <a href="/" className="nav-link">
-                  Home
-                </a>
-              </li>
-              <li className="d-inline-block fs-s mr-sm">
-                <a href="/" className="nav-link">
-                  Shop Now
-                </a>
-              </li>
+              <Link to="/">
+                <li className="d-inline-block fs-s mr-sm">
+                  <a href="/" className="nav-link">
+                    Home
+                  </a>
+                </li>
+              </Link>
+
+              <Link to="/products">
+                <li className="d-inline-block fs-s mr-sm">
+                  <a href="/" className="nav-link">
+                    Shop Now
+                  </a>
+                </li>
+              </Link>
             </ul>
           </div>
 
