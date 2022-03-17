@@ -1,0 +1,42 @@
+.divider-line{
+    width: 100%;
+    height: 1px;
+    background-color: var(--SIDE-NAVBAR-COLOR);
+    margin: 1.5rem 0;
+}
+
+.filter-heading{
+    justify-content: space-between;
+}
+
+.filter-title{
+    padding-bottom: 1rem;
+}
+
+.form-checkbox{
+    margin-right: 0.5rem;
+}
+
+.form-label{
+    display: inline-block;
+    margin-bottom: 1rem;
+}
+
+.underline{
+    border-bottom: 1px solid var(--SECONDARY-COLOR)
+}
+
+.underline:hover{
+    border-bottom: 3px solid var(--SECONDARY-COLOR);
+    color: var(--SECONDARY-COLOR);
+}
+
+.slider-label{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+}
+
+.input-slider{
+    width: 100%;
+}

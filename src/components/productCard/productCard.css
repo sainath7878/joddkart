@@ -1,7 +1,17 @@
 .card{
     justify-content: space-between;
+    max-height: 45rem;
 }
 
 .card > p{
     font-weight: 500;
+}
+
+.rating{ 
+    padding: 2px;
+    width: 60px;
+    background-color: var(--SECONDARY-COLOR);
+    border-radius: 2px;
+    margin-left: 1rem;
+    color: var(--BACKGROUND-COLOR);
 }

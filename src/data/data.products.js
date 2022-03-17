@@ -10,8 +10,8 @@ const trendingProducts = [
         description:
             "Land on strategic locations, loot weapons and supplies, and survive to become the last team standing across various Battlegrounds.",
         price: {
-            originalPrice: 1499,
-            discountedPrice: 999,
+            original: 1499,
+            discounted: 999,
         },
         discount: 34,
     },
@@ -22,8 +22,8 @@ const trendingProducts = [
         description:
             "In FIFA 19, you play existing teams or build your dream team and play various real-world or envisioned football situations or campaigns.",
         price: {
-            originalPrice: 2499,
-            discountedPrice: 1299,
+            original: 2499,
+            discounted: 1299,
         },
         discount: 40,
     },
@@ -34,8 +34,8 @@ const trendingProducts = [
         description:
             "Hack your way through the vibrant neighborhoods of the Bay Area: San Francisco, Marin County, Oakland, and Silicon Valley.",
         price: {
-            originalPrice: 3099,
-            discountedPrice: 1499,
+            original: 3099,
+            discounted: 1499,
         },
         discount: 45,
     },
@@ -46,8 +46,8 @@ const trendingProducts = [
         description:
             "Forza Horizon 3 allows players to race in a fictional representation of Australia.",
         price: {
-            originalPrice: 1299,
-            discountedPrice: 699,
+            original: 1299,
+            discounted: 699,
         },
         discount: 45,
     },

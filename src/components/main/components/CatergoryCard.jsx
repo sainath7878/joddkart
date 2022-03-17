@@ -1,30 +1,41 @@
-import uuid from "react-uuid";
 import "./categoryCard.css";
-
-import { fps, fifa, openWorld, racing } from "../../../assets/images/index";
-
-const categories = [
-  { key: uuid(), name: "FPS", imgSrc: fps },
-  { key: uuid(), name: "Racing", imgSrc: racing },
-  { key: uuid(), name: "Open World", imgSrc: openWorld },
-  { key: uuid(), name: "Fifa", imgSrc: fifa },
-];
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { useProducts } from "../../../context/product-context";
 
 function CategoryCard() {
-  return categories.map((item) => {
+  const [categories, setCategories] = useState([]);
+  useEffect(() => {
+    (async function () {
+      try {
+        const { data } = await axios.get("/api/categories");
+        setCategories(data.categories);
+      } catch (err) {
+        console.log(err);
+      }
+    })();
+  }, []);
+  const { dispatch } = useProducts();
+  return categories.map(({ key, name, imgSrc }) => {
     return (
-      <div key={item.key} className="card-vertical">
-        <a href="/">
+      <div key={key} className="card-vertical">
+        <Link
+          to="/products"
+          onClick={() =>
+            dispatch({ type: "PRODUCTS_WITH_CATEGORIES", payload: name })
+          }
+        >
           <div className="overlay fs-l d-flex justify-center align-center">
-            {item.name}
+            {name}
           </div>
           <img
             loading="lazy"
-            src={item.imgSrc}
+            src={imgSrc}
             alt="Racing Games"
             className="image-res"
           />
-        </a>
+        </Link>
       </div>
     );
   });

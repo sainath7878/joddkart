@@ -1,18 +1,19 @@
-
 import './App.css';
-import { Header, Footer, Main } from "./components/index"
-import { makeServer } from "./server";
+import Mockman from "mockman-js";
+import { Routes, Route } from "react-router-dom";
+import { LandingPage } from "./pages/landingPage/LandingPage"
+import { ProductsListingPage } from "./pages/productsListingPage/productListing"
 
-// Call make Server
-makeServer();
 
 
 function App() {
   return (
     <div className="App">
-      <Header />
-      <Main />
-      <Footer />
+      <Routes>
+        <Route path="/mockman" element={<Mockman />} />
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/products" element={<ProductsListingPage />} />
+      </Routes>
     </div>
   );
 }
