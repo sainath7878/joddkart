@@ -85,9 +85,9 @@ function Filter() {
             <input
               type="checkbox"
               className="form-checkbox"
-              checked={state.filters.categories.includes("openWorld")}
+              checked={state.filters.categories.includes("OPEN WORLD")}
               onChange={() =>
-                dispatch({ type: "CATEGORIES", payload: "openWorld" })
+                dispatch({ type: "CATEGORIES", payload: "OPEN WORLD" })
               }
             />
             Open World
@@ -169,7 +169,7 @@ function Filter() {
           <div className="slider-label">
             <label className="fs-s">1000</label>
             <label className="fs-s">to</label>
-            <label className="fs-s"> 5000</label>
+            <label className="fs-s">{state.filters.priceRange}</label>
           </div>
         </li>
         <div className="divider-line"></div>

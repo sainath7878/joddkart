@@ -10,7 +10,7 @@ export const getFilteredData = (data, filters) => {
         filteredData = filteredData.filter(item => item.inStock)
     }
     if (filters.priceRange) {
-        filteredData = filteredData.filter(item => item.price.discountedPrice < filters.priceRange)
+        filteredData = filteredData.filter(item => item.price.discounted < filters.priceRange)
     }
     return filteredData;
 }

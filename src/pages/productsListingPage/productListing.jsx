@@ -5,7 +5,7 @@ import "./productListingPage.css";
 
 function ProductsListingPage() {
   return (
-    <div className="productListing" >
+    <div className="productListing">
       <Header />
       <main className="main">
         <aside className="filter">

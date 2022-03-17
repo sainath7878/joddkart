@@ -9,7 +9,7 @@ import { fps, fifa, openWorld, racing } from "../../assets/images/index";
 
 export const categories = [
   { key: uuid(), name: "FPS", imgSrc: fps },
-  { key: uuid(), name: "Racing", imgSrc: racing },
-  { key: uuid(), name: "Open World", imgSrc: openWorld },
-  { key: uuid(), name: "Fifa", imgSrc: fifa },
+  { key: uuid(), name: "RACING", imgSrc: racing },
+  { key: uuid(), name: "OPEN WORLD", imgSrc: openWorld },
+  { key: uuid(), name: "FIFA", imgSrc: fifa },
 ];

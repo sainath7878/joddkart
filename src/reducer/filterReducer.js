@@ -6,11 +6,12 @@ export const initialState = {
         categories: [],
         includeOutOfStock: false,
         rating: null,
-        priceRange: "1000"
+        priceRange: 2000
     }
 }
 
 const reducerFunc = (state, action) => {
+    const { filters } = state
     switch (action.type) {
         case "INITIALIZE_PRODUCTS":
             return {
@@ -20,29 +21,34 @@ const reducerFunc = (state, action) => {
             return {
                 ...state, loader: action.payload
             }
+        case "PRODUCTS_WITH_CATEGORIES":
+            return {
+                ...state, filters: {...filters, categories: filters.categories.concat(action.payload)}
+            }
+
         case "SORT_BY":
             return {
-                ...state, filters: { ...state.filters, sortBy: action.payload }
+                ...state, filters: { ...filters, sortBy: action.payload }
             }
         case "CATEGORIES":
             return state.filters.categories.includes(action.payload) ?
                 {
-                    ...state, filters: { ...state.filters, categories: state.filters.categories.filter(item => item !== action.payload) }
+                    ...state, filters: { ...filters, categories: filters.categories.filter(item => item !== action.payload) }
                 } :
                 {
-                    ...state, filters: { ...state.filters, categories: [...state.filters.categories, action.payload] }
+                    ...state, filters: { ...filters, categories: [...filters.categories, action.payload] }
                 }
         case "RATINGS":
             return {
-                ...state, filters: { ...state.filters, rating: action.payload }
+                ...state, filters: { ...filters, rating: action.payload }
             }
         case "IS_INSTOCK":
             return {
-                ...state, filters: { ...state.filters, includeOutOfStock: !state.filters.includeOutOfStock }
+                ...state, filters: { ...filters, includeOutOfStock: !filters.includeOutOfStock }
             }
         case "PRICE_RANGE":
             return {
-                ...state, filters:{...state.filters, priceRange: action.payload}
+                ...state, filters: { ...filters, priceRange: action.payload }
             }
         case "CLEAR_FILTERS":
             return {
@@ -54,4 +60,4 @@ const reducerFunc = (state, action) => {
     }
 }
 
-export {reducerFunc};
+export { reducerFunc };

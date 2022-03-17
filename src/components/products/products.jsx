@@ -14,7 +14,7 @@ function AllProducts() {
             imgSrc,
             name,
             description,
-            price: { originalPrice, discountedPrice },
+            price: { original, discounted },
             discount,
             rating,
             inStock,
@@ -28,8 +28,8 @@ function AllProducts() {
               name={name}
               imgSrc={imgSrc}
               description={description}
-              originalPrice={originalPrice}
-              discountedPrice={discountedPrice}
+              original={original}
+              discounted={discounted}
               discount={discount}
               wishlist={true}
               dismiss={false}

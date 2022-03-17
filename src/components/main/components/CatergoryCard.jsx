@@ -1,6 +1,8 @@
 import "./categoryCard.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { useProducts } from "../../../context/product-context";
 
 function CategoryCard() {
   const [categories, setCategories] = useState([]);
@@ -14,20 +16,26 @@ function CategoryCard() {
       }
     })();
   }, []);
-  return categories.map((item) => {
+  const { dispatch } = useProducts();
+  return categories.map(({ key, name, imgSrc }) => {
     return (
-      <div key={item.key} className="card-vertical">
-        <a href="/">
+      <div key={key} className="card-vertical">
+        <Link
+          to="/products"
+          onClick={() =>
+            dispatch({ type: "PRODUCTS_WITH_CATEGORIES", payload: name })
+          }
+        >
           <div className="overlay fs-l d-flex justify-center align-center">
-            {item.name}
+            {name}
           </div>
           <img
             loading="lazy"
-            src={item.imgSrc}
+            src={imgSrc}
             alt="Racing Games"
             className="image-res"
           />
-        </a>
+        </Link>
       </div>
     );
   });

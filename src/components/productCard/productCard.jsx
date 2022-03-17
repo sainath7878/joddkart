@@ -6,8 +6,8 @@ function ProductCard({
   imgSrc,
   name,
   description,
-  originalPrice,
-  discountedPrice,
+  original,
+  discounted,
   discount,
   wishlist,
   dismiss,
@@ -21,7 +21,7 @@ function ProductCard({
       <h1 className="fs-s card-text-highlight">{name}</h1>
       <p className="fs-s">{description}</p>
       <p className="fs-s">
-        <del>₹{originalPrice}</del> <span>₹{discountedPrice}</span>
+        <del>₹{original}</del> <span>₹{discounted}</span>
         <span className="discount"> {discount}%</span>
       </p>
       <p className="d-flex align-center fs-s rating">

@@ -19,23 +19,22 @@ function Header() {
             <button className="btn btn-secondary d-none mobile-view hamburger">
               <BiList className="fs-m" />
             </button>
-            <a href="/" className="nav-brand-link mr-sm">
-              JODD<span className="brand-text">Kart</span>
-            </a>
+            <Link to="/">
+              <p className="nav-brand-link mr-sm">
+                {" "}
+                JODD<span className="brand-text">Kart</span>
+              </p>
+            </Link>
             <ul className="d-inline-block d-flex align-center">
               <Link to="/">
                 <li className="d-inline-block fs-s mr-sm">
-                  <a href="/" className="nav-link">
-                    Home
-                  </a>
+                  <p className="nav-link">Home</p>
                 </li>
               </Link>
 
               <Link to="/products">
                 <li className="d-inline-block fs-s mr-sm">
-                  <a href="/" className="nav-link">
-                    Shop Now
-                  </a>
+                  <p className="nav-link">Shop Now</p>
                 </li>
               </Link>
             </ul>

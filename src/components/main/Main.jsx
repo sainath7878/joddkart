@@ -4,8 +4,11 @@ import { ProductCard } from "../productCard/productCard";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { useProducts } from "../../context/product-context";
+import { initialState } from "../../reducer/filterReducer";
 function Main() {
   const [trendingProducts, setTrendingProducts] = useState([]);
+  const { dispatch } = useProducts();
 
   useEffect(() => {
     (async function () {
@@ -18,6 +21,10 @@ function Main() {
     })();
   }, []);
 
+  useEffect(() => {
+    dispatch({ type: "CLEAR_FILTERS", payload: initialState.filters })
+  }, [dispatch])
+
   return (
     <div>
       <section className="hero d-flex align-center">
@@ -26,9 +33,7 @@ function Main() {
           <p className="banner-text mb-m">Buy Games at Flat 40% OFF</p>
           <Link to="/products">
             <li className="d-inline-block fs-s mr-sm">
-              <a href="/" className="btn btn-secondary fs-m">
-                Shop Now
-              </a>
+              <button className="btn btn-secondary fs-m">Shop Now</button>
             </li>
           </Link>
         </div>
@@ -54,25 +59,25 @@ function Main() {
                 imgSrc,
                 name,
                 description,
-                price: { originalPrice, discountedPrice },
+                price: { original, discounted },
                 discount,
                 badge,
                 inStock,
-                rating
+                rating,
               }) => {
                 return (
                   <ProductCard
-                    id={key}
+                    key={key}
                     name={name}
                     imgSrc={imgSrc}
                     description={description}
-                    originalPrice={originalPrice}
-                    discountedPrice={discountedPrice}
+                    original={original}
+                    discounted={discounted}
                     discount={discount}
                     wishlist={true}
                     dismiss={false}
                     inStock={inStock}
-                    badge = {badge}
+                    badge={badge}
                     rating={rating}
                   />
                 );
