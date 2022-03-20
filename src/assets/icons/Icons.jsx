@@ -9,6 +9,18 @@ export function BiCartFill(props) {
   );
 }
 
+export function BiDashLg(props) {
+  return (
+    <svg width="1em" height="1em" viewBox="0 0 16 16" {...props}>
+      <path
+        fill="currentColor"
+        fillRule="evenodd"
+        d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8Z"
+      ></path>
+    </svg>
+  );
+}
+
 export function BiGithub(props) {
   return (
     <svg width="1em" height="1em" viewBox="0 0 16 16" {...props}>
@@ -66,12 +78,46 @@ export function BiPersonFill(props) {
   );
 }
 
+export function BiPlus(props) {
+  return (
+    <svg width="1em" height="1em" viewBox="0 0 16 16" {...props}>
+      <path
+        fill="currentColor"
+        d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"
+      ></path>
+    </svg>
+  );
+}
+
+export function BiPlusLg(props) {
+  return (
+    <svg width="1em" height="1em" viewBox="0 0 16 16" {...props}>
+      <path
+        fill="currentColor"
+        fillRule="evenodd"
+        d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"
+      ></path>
+    </svg>
+  );
+}
+
 export function BiStarFill(props) {
   return (
     <svg width="1em" height="1em" viewBox="0 0 16 16" {...props}>
       <path
         fill="currentColor"
         d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327l4.898.696c.441.062.612.636.282.95l-3.522 3.356l.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
+      ></path>
+    </svg>
+  );
+}
+
+export function BiTrashFill(props) {
+  return (
+    <svg width="1em" height="1em" viewBox="0 0 16 16" {...props}>
+      <path
+        fill="currentColor"
+        d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"
       ></path>
     </svg>
   );

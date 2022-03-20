@@ -1,13 +1,33 @@
+import axios from "axios";
+import { useEffect } from "react";
 import { useProducts } from "../../context/product-context";
 import { ProductCard } from "../productCard/productCard";
 
-function AllProducts() {
-  const { state, filteredData } = useProducts();
-
+function WishList() {
+  const encodedToken = localStorage.getItem("token");
+  const { dispatch, state } = useProducts();
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await axios.get("/api/user/wishlist", {
+          headers: {
+            authorization: encodedToken,
+          },
+        });
+        if (response.status === 200) {
+          dispatch({
+            type: "INITIALIZE_WISHLIST",
+            payload: response.data.wishlist,
+          });
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    })();
+  });
   return (
     <>
-      {state.loader && <h1 className="fs-xl">Fetching data!</h1>}
-      {filteredData.map((item) => {
+      {state.wishList.map((item) => {
         const {
           _id,
           imgSrc,
@@ -41,4 +61,4 @@ function AllProducts() {
   );
 }
 
-export { AllProducts };
+export { WishList };

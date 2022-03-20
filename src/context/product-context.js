@@ -8,6 +8,10 @@ const ProductContext = createContext();
 
 function ProductsProvider({ children }) {
 
+    const encodedToken = localStorage.getItem("token");
+    const [state, dispatch] = useReducer(reducerFunc, initialState);
+
+
     useEffect(() => {
         (async () => {
             try {
@@ -21,7 +25,22 @@ function ProductsProvider({ children }) {
         })()
     }, [])
 
-    const [state, dispatch] = useReducer(reducerFunc, initialState);
+    useEffect(() => {
+        (async () => {
+            try {
+                const response = await axios.get("/api/user/cart", {
+                    headers: {
+                        authorization: encodedToken,
+                    },
+                });
+                if (response.status === 200) {
+                    dispatch({ type: "INITIALIZE_CART", payload: response.data.cart });
+                }
+            } catch (err) {
+                console.log(err);
+            }
+        })();
+    }, [dispatch, encodedToken]);
 
 
     const sortedData = getSortedData(state.allProducts, state.filters["sortBy"])
