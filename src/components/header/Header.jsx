@@ -9,8 +9,11 @@ import {
   BiPersonFill,
   BiList,
 } from "../../assets/icons/Icons";
+import { useProducts } from "../../context/product-context";
 
 function Header() {
+  const { state } = useProducts();
+
   return (
     <div>
       <header>
@@ -46,15 +49,21 @@ function Header() {
               placeholder="Search for games"
               className="form-input nav-search mr-sm"
             />
-            <a href="/" className="mr-sm">
-              <BiHeartFill className="fs-m nav-link" />
-            </a>
-            <div className="badge mr-sm">
-              <a href="/">
+            <Link to="/wishList">
+              <div className="badge mr-sm">
+                <BiHeartFill className="fs-m nav-link" />
+                <span className="text-badge d-flex-center">{state.wishList.length}</span>
+              </div>
+            </Link>
+              
+
+            <Link to="/cart">
+              <div className="badge mr-sm">
                 <BiCartFill className="fs-m nav-link" />
-                <span className="text-badge d-flex-center">5</span>
-              </a>
-            </div>
+                <span className="text-badge d-flex-center">{state.cart.length}</span>
+              </div>
+            </Link>
+
             <a href="/">
               <BiPersonFill className="fs-m nav-link" />
             </a>

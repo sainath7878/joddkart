@@ -1,29 +1,16 @@
 import "./main.css";
 import { CategoryCard } from "./components/CatergoryCard";
 import { ProductCard } from "../productCard/productCard";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { useProducts } from "../../context/product-context";
 import { initialState } from "../../reducer/filterReducer";
 function Main() {
-  const [trendingProducts, setTrendingProducts] = useState([]);
-  const { dispatch } = useProducts();
+  const { dispatch, filteredData } = useProducts();
 
   useEffect(() => {
-    (async function () {
-      try {
-        const { data } = await axios.get("/api/products");
-        setTrendingProducts(data.products);
-      } catch (err) {
-        console.log(err);
-      }
-    })();
-  }, []);
-
-  useEffect(() => {
-    dispatch({ type: "CLEAR_FILTERS", payload: initialState.filters })
-  }, [dispatch])
+    dispatch({ type: "CLEAR_FILTERS", payload: initialState.filters });
+  }, [dispatch]);
 
   return (
     <div>
@@ -51,38 +38,36 @@ function Main() {
         <h1 className="fs-xl text-align-center">Trending Games</h1>
         <div className="title-underline"></div>
         <div className="grid">
-          {trendingProducts
-            .slice(0, 4)
-            .map(
-              ({
-                key,
-                imgSrc,
-                name,
-                description,
-                price: { original, discounted },
-                discount,
-                badge,
-                inStock,
-                rating,
-              }) => {
-                return (
-                  <ProductCard
-                    key={key}
-                    name={name}
-                    imgSrc={imgSrc}
-                    description={description}
-                    original={original}
-                    discounted={discounted}
-                    discount={discount}
-                    wishlist={true}
-                    dismiss={false}
-                    inStock={inStock}
-                    badge={badge}
-                    rating={rating}
-                  />
-                );
-              }
-            )}
+          {filteredData.slice(0, 4).map((item) => {
+            const {
+              _id,
+              imgSrc,
+              name,
+              description,
+              price: { original, discounted },
+              discount,
+              badge,
+              inStock,
+              rating,
+            } = item;
+            return (
+              <ProductCard
+                key={_id}
+                name={name}
+                imgSrc={imgSrc}
+                description={description}
+                original={original}
+                discounted={discounted}
+                discount={discount}
+                wishlist={true}
+                dismiss={false}
+                inStock={inStock}
+                badge={badge}
+                rating={rating}
+                item={item}
+              />
+            );
+          })}
         </div>
       </section>
     </div>

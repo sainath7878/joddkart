@@ -1,6 +1,6 @@
 @import "https://jodd-component-css.netlify.app/main.css";
 
-:root{
+:root {
   --SIDE-NAVBAR-COLOR: #e5e7eb;
 }
 
@@ -8,7 +8,7 @@ a {
   color: var(--PRIMARY-COLOR);
 }
 
-.btn:disabled{
+.btn:disabled {
   cursor: not-allowed;
 }
 
