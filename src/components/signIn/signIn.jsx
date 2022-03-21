@@ -17,7 +17,8 @@ function SignIn() {
     userName: "",
     password: "",
   });
-  const validation = /^(?=.*\d)(?=.*[a-z]).{5,10}$/;
+
+  const validation = /^(?=.*\d)(?=.*[a-z])([!@#$%]*).{5,}$/;
 
   const formHandler = (event, { userName, password }) => {
     event.preventDefault();
