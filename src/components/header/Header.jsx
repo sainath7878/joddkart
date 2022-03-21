@@ -64,8 +64,12 @@ function Header() {
               </div>
             </Link>
 
-            <a href="/">
+
+            <Link to="/signIn">
               <BiPersonFill className="fs-m nav-link" />
+            </Link>
+            <a href="/">
+              
             </a>
           </div>
         </nav>
