@@ -22,6 +22,11 @@
     width: 100%;
 }
 
+.form > div{
+    margin-bottom: 0;
+    height: 50px;
+}
+
 .form > button{
     width: 100%;
     border-radius: 5px;
