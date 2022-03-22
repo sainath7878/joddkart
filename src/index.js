@@ -9,7 +9,7 @@ import { signUpHandler } from './hooks/useSignUp';
 
 // Call make Server
 makeServer();
-signUpHandler()
+signUpHandler();
 
 
 ReactDOM.render(

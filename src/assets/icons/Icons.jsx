@@ -21,6 +21,39 @@ export function BiDashLg(props) {
   );
 }
 
+export function BiDoorOpenFill(props) {
+  return (
+    <svg width="1em" height="1em" viewBox="0 0 16 16" {...props}>
+      <path
+        fill="currentColor"
+        d="M1.5 15a.5.5 0 0 0 0 1h13a.5.5 0 0 0 0-1H13V2.5A1.5 1.5 0 0 0 11.5 1H11V.5a.5.5 0 0 0-.57-.495l-7 1A.5.5 0 0 0 3 1.5V15H1.5zM11 2h.5a.5.5 0 0 1 .5.5V15h-1V2zm-2.5 8c-.276 0-.5-.448-.5-1s.224-1 .5-1s.5.448.5 1s-.224 1-.5 1z"
+      ></path>
+    </svg>
+  );
+}
+
+export function BiEyeFill(props) {
+  return (
+    <svg width="1em" height="1em" viewBox="0 0 16 16" {...props}>
+      <g fill="currentColor">
+        <path d="M10.5 8a2.5 2.5 0 1 1-5 0a2.5 2.5 0 0 1 5 0z"></path>
+        <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7a3.5 3.5 0 0 0 0 7z"></path>
+      </g>
+    </svg>
+  );
+}
+
+export function BiEyeSlashFill(props) {
+  return (
+    <svg width="1em" height="1em" viewBox="0 0 16 16" {...props}>
+      <g fill="currentColor">
+        <path d="m10.79 12.912l-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.029 7.029 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.089z"></path>
+        <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708l-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6l-12-12l.708-.708l12 12l-.708.708z"></path>
+      </g>
+    </svg>
+  );
+}
+
 export function BiGithub(props) {
   return (
     <svg width="1em" height="1em" viewBox="0 0 16 16" {...props}>
