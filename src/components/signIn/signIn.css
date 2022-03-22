@@ -6,6 +6,18 @@
     border-color: var(--SECONDARY-COLOR);
 }
 
+.password-input{
+    width: 100%;
+}
+
+.visibility-icon{
+    position: relative;
+    top: -2.6rem;
+    left: 95%;
+    cursor: pointer;
+
+}
+
 .form-input{
     width: 100%;
 }

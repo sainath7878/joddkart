@@ -9,7 +9,7 @@ function AuthorizationPage() {
       <div className="authorization">
         <Header />
         <div className="flex-1">
-          {location.pathname === "/signIn" ? <SignIn /> : <SignUp />}
+          {location.pathname === "/signin" ? <SignIn /> : <SignUp />}
         </div>
         <Footer />
       </div>

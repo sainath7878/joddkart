@@ -1,34 +1,31 @@
 import "./signIn.css";
-import { BiDoorOpenFill } from "../../assets/icons/Icons";
+import {
+  BiDoorOpenFill,
+  BiEyeFill,
+  BiEyeSlashFill,
+} from "../../assets/icons/Icons";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 function SignIn() {
-
-  useEffect(()=>{
-    const timeOut = setTimeout(()=>{
-      setError({msg: "", state: false})
-    },3000)
+  useEffect(() => {
+    const timeOut = setTimeout(() => {
+      setError({ msg: "", state: false });
+    }, 3000);
     return () => clearTimeout(timeOut);
-  })
+  });
 
   const [error, setError] = useState({ msg: "", state: false });
   const [loginDetails, setLoginDetails] = useState({
     userName: "",
     password: "",
   });
-
-  const validation = /^(?=.*\d)(?=.*[a-z])([!@#$%]*).{5,}$/;
+  const [showPassword, setShowPassword] = useState(true);
 
   const formHandler = (event, { userName, password }) => {
     event.preventDefault();
     if (!userName && !password) {
       setError({ msg: "Please fill all the fields", state: true });
-    } else if (!password.match(validation)) {
-      setError({
-        msg: "Password must be alphanumeric with more than 5 characters!",
-        state: true,
-      });
     }
   };
 
@@ -44,16 +41,26 @@ function SignIn() {
         onChange={(e) =>
           setLoginDetails({ ...loginDetails, userName: e.target.value })
         }
-      />
-      <input
-        type="password"
-        id="password"
-        placeholder="Enter Password"
-        className={`form-input ${error.state ? "error-border" : ""}`}
-        onChange={(e) =>
-          setLoginDetails({ ...loginDetails, password: e.target.value })
-        }
-      />
+      />{" "}
+      <div className="password-input">
+        <input
+          type={`${showPassword ? "password" : "text"}`}
+          id="password"
+          placeholder="Enter Password"
+          className={`form-input ${error.state ? "error-border" : ""}`}
+          onChange={(e) =>
+            setLoginDetails({ ...loginDetails, password: e.target.value })
+          }
+        />
+        <span className="visibility-icon fs-s">
+          {showPassword ? (
+            <BiEyeFill onClick={() => setShowPassword(false)} />
+            
+          ) : (
+            <BiEyeSlashFill onClick={() => setShowPassword(true)} />
+          )}
+        </span>
+      </div>
       <button
         className="btn btn-secondary-outline fs-s"
         onClick={(e) => e.preventDefault()}
@@ -68,7 +75,7 @@ function SignIn() {
         <BiDoorOpenFill />
         LOGIN
       </button>
-      <Link to="/signUp" className="fs-s">
+      <Link to="/signup" className="fs-s">
         Not a Member yet? <span className="underline">Sign up now</span>
       </Link>
     </form>

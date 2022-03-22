@@ -1,5 +1,9 @@
 import "../signIn/signIn.css";
-import { BiDoorOpenFill } from "../../assets/icons/Icons";
+import {
+  BiDoorOpenFill,
+  BiEyeFill,
+  BiEyeSlashFill,
+} from "../../assets/icons/Icons";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
@@ -17,40 +21,37 @@ function SignUp() {
     confirmPassword: "",
   });
   const [error, setError] = useState({ msg: "", state: false });
+  const [showPassword, setShowPassword] = useState({password:true, confirmPassword:true});
 
   const validation = /^(?=.*\d)(?=.*[a-z])([!@#$%]*).{5,}$/;
 
   const signUpHandler = (event, { name, email, password, confirmPassword }) => {
     event.preventDefault();
     if (!name && !email && !password && !confirmPassword) {
-        setError({ msg: "Please fill all the fields", state: true });
-      }
-      else if(!password.match(validation)) {
-        setError({
-          msg: "Password must be alphanumeric with more than 5 characters!",
-          state: true,
-        });
-      } 
-      else if(password !== confirmPassword){
-        setError({
-            msg: "Both passwords must match",
-            state: true,
-          });
-      }
-      
-      
+      setError({ msg: "Please fill all the fields", state: true });
+    } else if (!password.match(validation)) {
+      setError({
+        msg: "Password must be alphanumeric with more than 5 characters!",
+        state: true,
+      });
+    } else if (password !== confirmPassword) {
+      setError({
+        msg: "Both passwords must match",
+        state: true,
+      });
+    }
   };
 
   return (
     <>
-      <form class="form d-flex align-center flex-column">
-        <h1 class="fs-l text-align-center">SIGN UP</h1>
+      <form className="form d-flex align-center flex-column">
+        <h1 className="fs-l text-align-center">SIGN UP</h1>
         <p className="danger-text fs-s">{error.state && error.msg}</p>
         <input
           type="text"
           id="username"
           placeholder="Enter Username"
-          class={`form-input ${error.state ? "error-border" : ""}`}
+          className={`form-input ${error.state ? "error-border" : ""}`}
           onChange={(e) =>
             setSignUpDetails({ ...signUpDetails, name: e.target.value })
           }
@@ -59,37 +60,58 @@ function SignUp() {
           type="email"
           id="email"
           placeholder="Enter Email"
-          class={`form-input ${error.state ? "error-border" : ""}`}
+          className={`form-input ${error.state ? "error-border" : ""}`}
           onChange={(e) =>
             setSignUpDetails({ ...signUpDetails, email: e.target.value })
           }
         />
-        <input
-          type="password"
-          id="password"
-          placeholder="Enter Password"
-          class={`form-input ${error.state ? "error-border" : ""}`}
-          onChange={(e) =>
-            setSignUpDetails({ ...signUpDetails, password: e.target.value })
-          }
-        />
-        <input
-          type="password"
-          id="confirm-password"
-          placeholder="Confirm Password"
-          class={`form-input ${error.state ? "error-border" : ""}`}
-          onChange={(e) =>
-            setSignUpDetails({
-              ...signUpDetails,
-              confirmPassword: e.target.value,
-            })
-          }
-        />
-        <button class="btn btn-secondary fs-s" onClick={(e) => signUpHandler(e,signUpDetails)}>
+        <div className="password-input">
+          <input
+            type={`${showPassword.password ? "password" : "text"}`}
+            id="password"
+            placeholder="Enter Password"
+            className={`form-input ${error.state ? "error-border" : ""}`}
+            onChange={(e) =>
+              setSignUpDetails({ ...signUpDetails, password: e.target.value })
+            }
+          />
+          <span className="visibility-icon fs-s">
+            {showPassword.password ? (
+              <BiEyeFill onClick={() => setShowPassword({...showPassword, password:false})} />
+            ) : (
+              <BiEyeSlashFill onClick={() => setShowPassword({...showPassword, password:true})} />
+            )}
+          </span>
+        </div>
+        <div className="password-input">
+          <input
+            type={`${showPassword.confirmPassword ? "password" : "text"}`}
+            id="password"
+            placeholder="Enter Password"
+            className={`form-input ${error.state ? "error-border" : ""}`}
+            onChange={(e) =>
+              setSignUpDetails({
+                ...signUpDetails,
+                confirmPassword: e.target.value,
+              })
+            }
+          />
+          <span className="visibility-icon fs-s">
+            {showPassword.confirmPassword ? (
+              <BiEyeFill onClick={() => setShowPassword({...showPassword, confirmPassword:false})} />
+            ) : (
+              <BiEyeSlashFill onClick={() => setShowPassword({...showPassword, confirmPassword:true})} />
+            )}
+          </span>
+        </div>
+        <button
+          className="btn btn-secondary fs-s"
+          onClick={(e) => signUpHandler(e, signUpDetails)}
+        >
           <BiDoorOpenFill /> SIGNUP
         </button>
-        <Link to="/signIn" className="fs-s">
-          Already a Member <span class="underline">Sign In</span>
+        <Link to="/signin" className="fs-s">
+          Already a Member <span className="underline">Sign In</span>
         </Link>
       </form>
     </>
