@@ -5,19 +5,22 @@ import App from './App';
 import { BrowserRouter } from "react-router-dom";
 import { makeServer } from "./server";
 import { ProductsProvider } from "./context/product-context"
-import { signUpHandler } from './hooks/useSignUp';
+import { AuthProvider } from "./context/auth-context"
+// import { signUpHandler } from './hooks/useSignUp';
 
 // Call make Server
 makeServer();
-signUpHandler();
+// signUpHandler();
 
 
 ReactDOM.render(
   < React.StrictMode >
     <BrowserRouter>
-      <ProductsProvider>
-        <App />
-      </ProductsProvider>
+      <AuthProvider>
+        <ProductsProvider>
+          <App />
+        </ProductsProvider>
+      </AuthProvider>
     </BrowserRouter>
   </React.StrictMode >,
   document.getElementById('root')

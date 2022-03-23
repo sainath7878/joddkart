@@ -19,6 +19,10 @@
   background-color: transparent;
 }
 
+.logout{
+  cursor: pointer;
+}
+
 @media only screen and (max-width: 600px) {
   .nav-section > * {
     margin-right: 5px;

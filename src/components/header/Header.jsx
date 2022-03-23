@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import "./header.css";
 
@@ -8,11 +8,22 @@ import {
   BiCartFill,
   BiPersonFill,
   BiList,
+  IcBaselineLogout,
 } from "../../assets/icons/Icons";
 import { useProducts } from "../../context/product-context";
+import { useAuth } from "../../context/auth-context";
 
 function Header() {
-  const { state } = useProducts();
+  const { state, dispatch } = useProducts();
+  const { authState, authDispatch } = useAuth();
+  const navigate = useNavigate();
+
+  const logoutHandler = () => {
+    authDispatch({ type: "LOGOUT" });
+    dispatch({type:"INITIALIZE_WISHLIST", payload: [] })
+    dispatch({type:"INITIALIZE_CART", payload: [] })
+    navigate("/");
+  };
 
   return (
     <div>
@@ -52,25 +63,35 @@ function Header() {
             <Link to="/wishList">
               <div className="badge mr-sm">
                 <BiHeartFill className="fs-m nav-link" />
-                <span className="text-badge d-flex-center">{state.wishList.length}</span>
+                {authState.isLoggedIn ? (
+                  <span className="text-badge d-flex-center">
+                    {state.wishList.length}
+                  </span>
+                ) : null}
               </div>
             </Link>
-              
 
             <Link to="/cart">
               <div className="badge mr-sm">
                 <BiCartFill className="fs-m nav-link" />
-                <span className="text-badge d-flex-center">{state.cart.length}</span>
+                {authState.isLoggedIn ? (
+                  <span className="text-badge d-flex-center">
+                    {state.cart.length}
+                  </span>
+                ) : null}
               </div>
             </Link>
 
-
-            <Link to="/signin">
-              <BiPersonFill className="fs-m nav-link" />
-            </Link>
-            <a href="/">
-              
-            </a>
+            {authState.isLoggedIn ? (
+              <IcBaselineLogout
+                className="fs-xl nav-link logout"
+                onClick={() => logoutHandler()}
+              />
+            ) : (
+              <Link to="/signin">
+                <BiPersonFill className="fs-m nav-link" />
+              </Link>
+            )}
           </div>
         </nav>
         <div className="nav-searchbar-res d-none">
