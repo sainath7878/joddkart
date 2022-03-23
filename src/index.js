@@ -6,11 +6,11 @@ import { BrowserRouter } from "react-router-dom";
 import { makeServer } from "./server";
 import { ProductsProvider } from "./context/product-context"
 import { AuthProvider } from "./context/auth-context"
-// import { signUpHandler } from './hooks/useSignUp';
+
 
 // Call make Server
 makeServer();
-// signUpHandler();
+
 
 
 ReactDOM.render(

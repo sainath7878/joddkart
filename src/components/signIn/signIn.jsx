@@ -11,13 +11,6 @@ import axios from "axios";
 import { useProducts } from "../../context/product-context";
 
 function SignIn() {
-  useEffect(() => {
-    const timeOut = setTimeout(() => {
-      setError({ msg: "", state: false });
-    }, 3000);
-    return () => clearTimeout(timeOut);
-  });
-
   const [error, setError] = useState({ msg: "", state: false });
   const [loginDetails, setLoginDetails] = useState({
     email: "",
@@ -28,8 +21,14 @@ function SignIn() {
   const { dispatch } = useProducts();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const timeOut = setTimeout(() => {
+      setError({ msg: "", state: false });
+    }, 3000);
+    return () => clearTimeout(timeOut);
+  }, [error.state]);
 
- // Function which call signHandler
+  // Function which call signHandler
   const signInHandler = async (loginDetails) => {
     const { email, password } = loginDetails;
 
@@ -39,8 +38,6 @@ function SignIn() {
         password: password,
       });
       if (response.status === 200) {
-        console.log("logged In");
-        console.log(response.data);
         localStorage.setItem("token", response.data.encodedToken);
         authDispatch({
           type: "SET_USER",
