@@ -4,28 +4,70 @@ import {
   BiEyeFill,
   BiEyeSlashFill,
 } from "../../assets/icons/Icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useAuth } from "../../context/auth-context";
+import axios from "axios";
+import { useProducts } from "../../context/product-context";
 
 function SignIn() {
+  const [error, setError] = useState({ msg: "", state: false });
+  const [loginDetails, setLoginDetails] = useState({
+    email: "",
+    password: "",
+  });
+  const [showPassword, setShowPassword] = useState(true);
+  const { authDispatch } = useAuth();
+  const { dispatch } = useProducts();
+  const navigate = useNavigate();
+
   useEffect(() => {
     const timeOut = setTimeout(() => {
       setError({ msg: "", state: false });
     }, 3000);
     return () => clearTimeout(timeOut);
-  });
+  }, [error.state]);
 
-  const [error, setError] = useState({ msg: "", state: false });
-  const [loginDetails, setLoginDetails] = useState({
-    userName: "",
-    password: "",
-  });
-  const [showPassword, setShowPassword] = useState(true);
+  // Function which call signHandler
+  const signInHandler = async (loginDetails) => {
+    const { email, password } = loginDetails;
 
-  const formHandler = (event, { userName, password }) => {
+    try {
+      const response = await axios.post("/api/auth/login", {
+        email: email,
+        password: password,
+      });
+      if (response.status === 200) {
+        localStorage.setItem("token", response.data.encodedToken);
+        authDispatch({
+          type: "SET_USER",
+          payload: {
+            isLoggedIn: true,
+            encodedToken: response.data.encodedToken,
+          },
+        });
+        dispatch({
+          type: "INITIALIZE_CART",
+          payload: response.data.foundUser.cart,
+        });
+        dispatch({
+          type: "INITIALIZE_WISHLIST",
+          payload: response.data.foundUser.wishlist,
+        });
+        navigate("/products", { replace: true });
+      }
+    } catch (err) {
+      console.log("Error while signin In ", err);
+      setError({ msg: "Please Enter valid Credentials", state: true });
+    }
+  };
+
+  const formHandler = (event, { email, password }) => {
     event.preventDefault();
-    if (!userName && !password) {
+    if (!email && !password) {
       setError({ msg: "Please fill all the fields", state: true });
+    } else {
+      signInHandler(loginDetails);
     }
   };
 
@@ -39,7 +81,7 @@ function SignIn() {
         placeholder="Enter Email"
         className={`form-input ${error.state ? "error-border" : ""}`}
         onChange={(e) =>
-          setLoginDetails({ ...loginDetails, userName: e.target.value })
+          setLoginDetails({ ...loginDetails, email: e.target.value })
         }
       />{" "}
       <div className="password-input">
@@ -55,15 +97,17 @@ function SignIn() {
         <span className="visibility-icon fs-s">
           {showPassword ? (
             <BiEyeFill onClick={() => setShowPassword(false)} />
-            
           ) : (
             <BiEyeSlashFill onClick={() => setShowPassword(true)} />
           )}
         </span>
       </div>
       <button
+        type="button"
         className="btn btn-secondary-outline fs-s"
-        onClick={(e) => e.preventDefault()}
+        onClick={() =>
+          signInHandler({ email: "johndoe@gmail.com", password: "johnDoe123" })
+        }
       >
         <BiDoorOpenFill />
         LOGIN WITH TEST CREDENTIALS

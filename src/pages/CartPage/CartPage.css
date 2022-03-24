@@ -10,19 +10,21 @@
   position: relative;
 }
 
-.horizontal-card{
+.horizontal-card {
   margin-bottom: 2rem;
 }
 
-.card-content > p{
+.card-content > p {
   font-weight: 500;
 }
 
-.card-content > .cta > .btn{
-  display: inline-block;
+.cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
-.card-content{
+.card-content {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -58,7 +60,7 @@
   gap: 1rem;
 }
 
-.quantity > .btn{
+.quantity > .btn {
   padding: 0.5rem;
 }
 

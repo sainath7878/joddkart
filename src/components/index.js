@@ -7,5 +7,7 @@ import { EmptyCart } from "./cart/emptyCart";
 import { Amount } from "./cart/Amount";
 import { SignIn } from "./signIn/signIn"
 import { SignUp } from "./signUp/signUp"
+import { Authorized } from "./authorization/authorized"
 
-export { Header, Footer, Main, CartCard, Cart, EmptyCart, Amount, SignIn, SignUp };
+
+export { Header, Footer, Main, CartCard, Cart, EmptyCart, Amount, SignIn, SignUp, Authorized };

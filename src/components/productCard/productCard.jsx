@@ -1,9 +1,9 @@
 import "./productCard.css";
 import { cartSolid } from "../../assets/images/index";
 import { BiHeartFill, BiXLg, BiStarFill } from "../../assets/icons/Icons";
-import { useProducts } from "../../context/product-context";
+import { useProducts, useAuth } from "../../context/index";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function ProductCard({
   imgSrc,
@@ -17,11 +17,13 @@ function ProductCard({
   badge,
   rating,
   inStock,
-  isInWishList,
   item,
 }) {
   const { state, dispatch } = useProducts();
+  const { authState } = useAuth();
+  const navigate = useNavigate();
   const encodedToken = localStorage.getItem("token");
+
   const addToCart = async (item) => {
     try {
       const response = await axios.post(
@@ -101,13 +103,25 @@ function ProductCard({
               </button>
             </Link>
           ) : (
-            <button
-              className="btn btn-secondary d-flex-center"
-              onClick={() => addToCart(item)}
-            >
-              <img src={cartSolid} alt="cart" className="btn-icon" /> Add to
-              Cart
-            </button>
+            <>
+              {authState.isLoggedIn ? (
+                <button
+                  className="btn btn-secondary d-flex-center"
+                  onClick={() => addToCart(item)}
+                >
+                  <img src={cartSolid} alt="cart" className="btn-icon" />
+                  Add to Cart
+                </button>
+              ) : (
+                <button
+                  className="btn btn-secondary d-flex-center"
+                  onClick={() => navigate("/signin", { replace: true })}
+                >
+                  <img src={cartSolid} alt="cart" className="btn-icon" />
+                  Add to Cart
+                </button>
+              )}
+            </>
           )
         ) : (
           <button className="btn btn-primary d-flex-center" disabled>

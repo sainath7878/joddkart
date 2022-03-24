@@ -36,7 +36,7 @@ function ProductsProvider({ children }) {
                 if (response.status === 200) {
                     dispatch({ type: "INITIALIZE_CART", payload: response.data.cart });
                 }
-            } catch (err) {
+            }catch (err) {
                 console.log(err);
             }
         })();

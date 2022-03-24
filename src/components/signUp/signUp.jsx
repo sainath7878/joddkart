@@ -4,8 +4,11 @@ import {
   BiEyeFill,
   BiEyeSlashFill,
 } from "../../assets/icons/Icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import axios from "axios";
+import { useAuth } from "../../context/auth-context";
+import { useProducts } from "../../context/product-context";
 
 function SignUp() {
   useEffect(() => {
@@ -14,20 +17,61 @@ function SignUp() {
     }, 5000);
     return () => clearTimeout(timeOut);
   });
+
   const [signUpDetails, setSignUpDetails] = useState({
-    name: "",
+    fullName: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
-  const [error, setError] = useState({ msg: "", state: false });
-  const [showPassword, setShowPassword] = useState({password:true, confirmPassword:true});
 
   const validation = /^(?=.*\d)(?=.*[a-z])([!@#$%]*).{5,}$/;
+  const [error, setError] = useState({ msg: "", state: false });
+  const [showPassword, setShowPassword] = useState({
+    password: true,
+    confirmPassword: true,
+  });
+  const { authDispatch } = useAuth();
+  const { dispatch } = useProducts();
+  const navigate = useNavigate();
 
-  const signUpHandler = (event, { name, email, password, confirmPassword }) => {
+  const signUpHandler = async ({ fullName, email, password }) => {
+    try {
+      const response = await axios.post("/api/auth/signup", {
+        email: email,
+        password: password,
+        fullName: fullName,
+      });
+      if (response.status === 201) {
+        authDispatch({
+          type: "SET_USER",
+          payload: {
+            _id: response.data.createdUser._id,
+            email: response.data.createdUser.email,
+            encodedToken: response.data.encodedToken,
+          },
+        });
+        dispatch({
+          type: "INITIALIZE_CART",
+          payload: response.data.createdUser.cart,
+        });
+        dispatch({
+          type: "INITIALIZE_WISHLIST",
+          payload: response.data.createdUser.wishlist,
+        });
+        navigate("/products", { replace: true });
+      }
+    } catch (err) {
+      setError({ msg: "Try again after some time", status: true });
+      console.log("Could not signUp", err);
+    }
+  };
+
+  const signUpValidator = (event, signUpDetails) => {
     event.preventDefault();
-    if (!name && !email && !password && !confirmPassword) {
+    const { fullName, email, password, confirmPassword } = signUpDetails;
+
+    if (!fullName && !email && !password && !confirmPassword) {
       setError({ msg: "Please fill all the fields", state: true });
     } else if (!password.match(validation)) {
       setError({
@@ -39,6 +83,8 @@ function SignUp() {
         msg: "Both passwords must match",
         state: true,
       });
+    } else {
+      signUpHandler(signUpDetails);
     }
   };
 
@@ -49,11 +95,11 @@ function SignUp() {
         <p className="danger-text fs-s">{error.state && error.msg}</p>
         <input
           type="text"
-          id="username"
-          placeholder="Enter Username"
+          id="userfullName"
+          placeholder="Enter full name"
           className={`form-input ${error.state ? "error-border" : ""}`}
           onChange={(e) =>
-            setSignUpDetails({ ...signUpDetails, name: e.target.value })
+            setSignUpDetails({ ...signUpDetails, fullName: e.target.value })
           }
         />
         <input
@@ -77,16 +123,24 @@ function SignUp() {
           />
           <span className="visibility-icon fs-s">
             {showPassword.password ? (
-              <BiEyeFill onClick={() => setShowPassword({...showPassword, password:false})} />
+              <BiEyeFill
+                onClick={() =>
+                  setShowPassword({ ...showPassword, password: false })
+                }
+              />
             ) : (
-              <BiEyeSlashFill onClick={() => setShowPassword({...showPassword, password:true})} />
+              <BiEyeSlashFill
+                onClick={() =>
+                  setShowPassword({ ...showPassword, password: true })
+                }
+              />
             )}
           </span>
         </div>
         <div className="password-input">
           <input
             type={`${showPassword.confirmPassword ? "password" : "text"}`}
-            id="password"
+            id="confirmPassword"
             placeholder="Enter Password"
             className={`form-input ${error.state ? "error-border" : ""}`}
             onChange={(e) =>
@@ -98,15 +152,23 @@ function SignUp() {
           />
           <span className="visibility-icon fs-s">
             {showPassword.confirmPassword ? (
-              <BiEyeFill onClick={() => setShowPassword({...showPassword, confirmPassword:false})} />
+              <BiEyeFill
+                onClick={() =>
+                  setShowPassword({ ...showPassword, confirmPassword: false })
+                }
+              />
             ) : (
-              <BiEyeSlashFill onClick={() => setShowPassword({...showPassword, confirmPassword:true})} />
+              <BiEyeSlashFill
+                onClick={() =>
+                  setShowPassword({ ...showPassword, confirmPassword: true })
+                }
+              />
             )}
           </span>
         </div>
         <button
           className="btn btn-secondary fs-s"
-          onClick={(e) => signUpHandler(e, signUpDetails)}
+          onClick={(e) => signUpValidator(e, signUpDetails)}
         >
           <BiDoorOpenFill /> SIGNUP
         </button>

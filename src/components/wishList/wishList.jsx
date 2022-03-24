@@ -24,7 +24,7 @@ function WishList() {
         console.log(err);
       }
     })();
-  });
+  },[dispatch, encodedToken]);
   return (
     <>
       {state.wishList.map((item) => {
