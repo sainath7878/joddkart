@@ -1,12 +1,8 @@
 import './App.css';
 import Mockman from "mockman-js";
 import { Routes, Route } from "react-router-dom";
-import { LandingPage } from "./pages/landingPage/LandingPage"
-import { ProductsListingPage } from "./pages/productsListingPage/productListing"
-import { CartPage } from "./pages/CartPage/CartPage";
-import { WishListPage } from "./pages/wishlistPage/WishListPage"
-import { AuthorizationPage } from "./pages/authorizationPage/authorizationPage"
-import { Authorized } from "./components/authorization/authorized"
+import { Authorized } from "./components/index"
+import {LandingPage,ProductsListingPage, CartPage, WishListPage, AuthorizationPage } from "./pages/index"
 
 function App() {
   return (

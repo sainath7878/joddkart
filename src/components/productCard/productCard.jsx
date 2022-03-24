@@ -1,10 +1,9 @@
 import "./productCard.css";
 import { cartSolid } from "../../assets/images/index";
 import { BiHeartFill, BiXLg, BiStarFill } from "../../assets/icons/Icons";
-import { useProducts } from "../../context/product-context";
+import { useProducts, useAuth } from "../../context/index";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/auth-context";
 
 function ProductCard({
   imgSrc,
