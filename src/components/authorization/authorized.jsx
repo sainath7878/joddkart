@@ -5,7 +5,13 @@ function Authorized() {
   const { authState } = useAuth();
   const location = useLocation();
   return (
-    <>{authState.isLoggedIn ? <Outlet /> : <Navigate to="/signin" from={{state: location}} replace />}</>
+    <>
+      {authState.isLoggedIn ? (
+        <Outlet />
+      ) : (
+        <Navigate to="/signin" from={{ state: location }} replace />
+      )}
+    </>
   );
 }
 

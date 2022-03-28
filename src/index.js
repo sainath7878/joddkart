@@ -11,8 +11,6 @@ import { AuthProvider } from "./context/auth-context"
 // Call make Server
 makeServer();
 
-
-
 ReactDOM.render(
   < React.StrictMode >
     <BrowserRouter>

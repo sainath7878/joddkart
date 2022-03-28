@@ -6,12 +6,10 @@ import {
 } from "../../assets/icons/Icons";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useAuth } from "../../context/auth-context";
+import { useAuth, useProducts } from "../../context/index";
 import axios from "axios";
-import { useProducts } from "../../context/product-context";
 
 function SignIn() {
-  const [error, setError] = useState({ msg: "", state: false });
   const [loginDetails, setLoginDetails] = useState({
     email: "",
     password: "",
@@ -20,6 +18,7 @@ function SignIn() {
   const { authDispatch } = useAuth();
   const { dispatch } = useProducts();
   const navigate = useNavigate();
+  const [error, setError] = useState({ msg: "", state: false });
 
   useEffect(() => {
     const timeOut = setTimeout(() => {
@@ -28,7 +27,6 @@ function SignIn() {
     return () => clearTimeout(timeOut);
   }, [error.state]);
 
-  // Function which call signHandler
   const signInHandler = async (loginDetails) => {
     const { email, password } = loginDetails;
 
