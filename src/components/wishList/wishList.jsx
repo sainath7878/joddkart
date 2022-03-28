@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect } from "react";
-import { useProducts } from "../../context/product-context";
+import { useProducts } from "../../context/index";
 import { ProductCard } from "../productCard/productCard";
 
 function WishList() {
