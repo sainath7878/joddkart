@@ -3,8 +3,10 @@ import { useProducts } from "../../context/product-context";
 import { WishList } from "../../components/wishList/wishList";
 import "./wishListPage.css";
 import { useAuth } from "../../context";
+import { useDocument } from "../../hooks/useDocument";
 
 function WishListPage() {
+  useDocument("WishList")
   const { state } = useProducts();
   const {
     authState: { toast },

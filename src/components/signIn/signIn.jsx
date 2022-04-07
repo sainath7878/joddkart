@@ -8,8 +8,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useAuth, useProducts } from "../../context/index";
 import axios from "axios";
+import { useDocument } from "../../hooks/useDocument";
 
 function SignIn() {
+
+  useDocument("SignIn")
   const [loginDetails, setLoginDetails] = useState({
     email: "",
     password: "",
