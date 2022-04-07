@@ -1,12 +1,16 @@
-import { Header, Footer, Main } from "../../components/index"
+import { Header, Footer, Main, Toast } from "../../components/index";
+import { useAuth } from "../../context";
 
-
-export function LandingPage(){
-    return(
-      <div>
-        <Header />
-        <Main />
-        <Footer />
-      </div>
-    )
-  }
+export function LandingPage() {
+  const {
+    authState: { toast },
+  } = useAuth();
+  return (
+    <div>
+      <Header />
+      {toast.toastState && <Toast />}
+      <Main />
+      <Footer />
+    </div>
+  );
+}

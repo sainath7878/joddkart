@@ -3,6 +3,11 @@ export const initialAuthState = {
     _id: "",
     email: "",
     encodedToken: "",
+    toast: {
+        type: "",
+        msg: "",
+        toastState: false
+    },
 }
 
 const authReducer = (authState, { type, payload }) => {
@@ -15,14 +20,16 @@ const authReducer = (authState, { type, payload }) => {
                 email: payload.email,
                 encodedToken: payload.encodedToken
             }
-        case "LOGOUT": {
+        case "LOGOUT":
             return {
                 isLoggedIn: false,
                 _id: "",
                 email: "",
                 encodedToken: "",
             }
-        }
+
+        case "SET_TOAST":
+            return { ...authState, toast: { type: payload.type, msg: payload.msg, toastState: payload.toastState } }
 
         default:
             return authState;

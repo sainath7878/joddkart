@@ -1,5 +1,5 @@
 import { v4 as uuid } from "uuid";
-import { fps, fifa, openWorld, racing } from "../../assets/images/index";
+import { fps, fifa, openWorld, racing, fifa22, fortnite, nfs, rdr2 } from "../../assets/images/index";
 
 
 /**
@@ -26,7 +26,7 @@ export const products = [
     },
     {
         _id: uuid(),
-        name: "FIFA",
+        name: "FIFA 19",
         imgSrc: fifa,
         description:
             "In FIFA 19, you play existing teams or build your dream team and play various real-world or envisioned football situations or campaigns.",
@@ -36,8 +36,8 @@ export const products = [
         },
         discount: 40,
         category: "FIFA",
-        inStock: false,
-        rating: 4,
+        inStock: true,
+        rating: 3.9,
         badge: false,
 
     },
@@ -75,15 +75,15 @@ export const products = [
     },
     {
         _id: uuid(),
-        name: "PUBG",
-        imgSrc: fps,
+        name: "Fortnite",
+        imgSrc: fortnite,
         description:
-            "Land on strategic locations, loot weapons and supplies, and survive to become the last team standing across various Battlegrounds.",
+            "A multiplayer game where you compete in Battle Royale, collaborate to create your private island in Creative, or quest in Save the World.",
         price: {
-            original: 4499,
-            discounted: 3999,
+            original: 2399,
+            discounted: 399,
         },
-        discount: 34,
+        discount: 80,
         category: "FPS",
         inStock: true,
         rating: 3.2,
@@ -91,50 +91,50 @@ export const products = [
     },
     {
         _id: uuid(),
-        name: "FIFA",
-        imgSrc: fifa,
+        name: "FIFA 22",
+        imgSrc: fifa22,
         description:
-            "In FIFA 19, you play existing teams or build your dream team and play various real-world or envisioned football situations or campaigns.",
+            "FIFA 22 brings the game even closer to the real thing with fundamental gameplay advances and a new season of innovation across every mode.",
         price: {
-            original: 2499,
-            discounted: 1299,
+            original: 3899,
+            discounted: 3499,
         },
-        discount: 40,
+        discount: 10,
         category: "FIFA",
-        inStock: false,
-        rating: 4.5,
+        inStock: true,
+        rating: 4.7,
         badge: false,
     },
     {
         _id: uuid(),
-        name: "Watch Dogs 2",
-        imgSrc: openWorld,
+        name: "Read Dead Redemption 2",
+        imgSrc: rdr2,
         description:
-            "Hack your way through the vibrant neighborhoods of the Bay Area: San Francisco, Marin County, Oakland, and Silicon Valley.",
+            "America, 1899. The end of the Wild West era has begun as lawmen hunt down the last remaining outlaw gangs. Those who will not surrender or succumb are killed.",
         price: {
-            original: 3099,
-            discounted: 1499,
+            original: 4099,
+            discounted: 2899,
         },
-        discount: 45,
+        discount: 35,
         category: "OPEN WORLD",
         inStock: true,
-        rating: 4.1,
+        rating: 3.0,
         badge: true,
     },
     {
         _id: uuid(),
-        name: "Forza Horizon 3",
-        imgSrc: racing,
+        name: "Need For Speed Heat",
+        imgSrc: nfs,
         description:
-            "Forza Horizon 3 allows players to race in a fictional representation of Australia.",
+            "Hustle by day and risk it all at night in Need for Speed™ Heat, a thrilling street race experience that pits you against a city's rogue police force.",
         price: {
-            original: 1299,
-            discounted: 699,
+            original: 2299,
+            discounted: 1799,
         },
         discount: 45,
         category: "RACING",
         inStock: true,
-        rating: 3.5,
+        rating: 3.1,
         badge: false,
     },
 ];

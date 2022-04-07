@@ -1,5 +1,6 @@
 import axios from "axios";
 import { BiDashLg, BiPlusLg, BiTrashFill } from "../../assets/icons/Icons";
+import { useAuth } from "../../context";
 import { useProducts } from "../../context/product-context";
 
 function CartCard({
@@ -14,6 +15,7 @@ function CartCard({
 }) {
   const encodedToken = localStorage.getItem("token");
   const { dispatch, state } = useProducts();
+  const { authDispatch } = useAuth();
   const removeFromCart = async (item) => {
     try {
       const response = await axios.delete(`/api/user/cart/${item._id}`, {
@@ -25,6 +27,14 @@ function CartCard({
         dispatch({
           type: "DELETE_FROM_CART",
           payload: response.data.cart,
+        });
+        authDispatch({
+          type: "SET_TOAST",
+          payload: {
+            type: "snackbar-danger",
+            msg: "Removed from Cart",
+            toastState: true,
+          },
         });
       }
     } catch (err) {
@@ -50,6 +60,14 @@ function CartCard({
         );
         if (response.status === 200) {
           dispatch({ type: "INCREMENT_QTY", payload: response.data.cart });
+          authDispatch({
+            type: "SET_TOAST",
+            payload: {
+              type: "snackbar-info",
+              msg: "Quantity Updated",
+              toastState: true,
+            },
+          });
         }
       } catch (err) {
         console.log(err);
@@ -71,6 +89,14 @@ function CartCard({
         );
         if (response.status === 200) {
           dispatch({ type: "DECREMENT_QTY", payload: response.data.cart });
+          authDispatch({
+            type: "SET_TOAST",
+            payload: {
+              type: "snackbar-info",
+              msg: "Quantity Updated",
+              toastState: true,
+            },
+          });
         }
       } catch (err) {
         console.log(err);
@@ -83,7 +109,7 @@ function CartCard({
     try {
       const response = await axios.post(
         "/api/user/wishlist",
-        { product: {...item, isInWishList: true} },
+        { product: { ...item, isInWishList: true } },
         {
           headers: {
             authorization: encodedToken,
@@ -92,6 +118,14 @@ function CartCard({
       );
       if (response.status === 201) {
         dispatch({ type: "ADD_TO_WISHLIST", payload: response.data.wishlist });
+        authDispatch({
+          type: "SET_TOAST",
+          payload: {
+            type: "snackbar-success",
+            msg: "Moved to WishList",
+            toastState: true,
+          },
+        });
       }
     } catch (err) {
       console.log(err);
@@ -134,7 +168,9 @@ function CartCard({
             >
               {state.wishList.find(
                 (wishListItem) => wishListItem._id === item._id
-              )? "Already In WishList" : "Move to WishList"}
+              )
+                ? "Already In WishList"
+                : "Move to WishList"}
             </button>
             <button
               className="btn btn-danger d-flex-center"

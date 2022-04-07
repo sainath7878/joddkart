@@ -20,8 +20,17 @@ function Header() {
 
   const logoutHandler = () => {
     authDispatch({ type: "LOGOUT" });
-    dispatch({type:"INITIALIZE_WISHLIST", payload: [] })
-    dispatch({type:"INITIALIZE_CART", payload: [] })
+    dispatch({ type: "INITIALIZE_WISHLIST", payload: [] });
+    dispatch({ type: "INITIALIZE_CART", payload: [] });
+    authDispatch({
+      type: "SET_TOAST",
+      payload: {
+        type: "snackbar-danger",
+        msg: "Logged Out",
+        toastState: true,
+      },
+    });
+    localStorage.removeItem("token")
     navigate("/");
   };
 

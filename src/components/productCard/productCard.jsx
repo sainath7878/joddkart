@@ -20,7 +20,7 @@ function ProductCard({
   item,
 }) {
   const { state, dispatch } = useProducts();
-  const { authState } = useAuth();
+  const { authState, authDispatch } = useAuth();
   const navigate = useNavigate();
   const encodedToken = localStorage.getItem("token");
 
@@ -37,6 +37,14 @@ function ProductCard({
       );
       if (response.status === 201) {
         dispatch({ type: "ADD_ITEM_TO_CART", payload: response.data.cart });
+        authDispatch({
+          type: "SET_TOAST",
+          payload: {
+            type: "snackbar-success",
+            msg: "Added to Cart",
+            toastState: true,
+          },
+        });
       }
     } catch (err) {
       console.log(err);
@@ -54,6 +62,14 @@ function ProductCard({
         dispatch({
           type: "TOGGLE_WISHLIST",
           payload: response.data.wishlist,
+        });
+        authDispatch({
+          type: "SET_TOAST",
+          payload: {
+            type: "snackbar-danger",
+            msg: "Removed from WishList",
+            toastState: true,
+          },
         });
       }
     } catch (err) {
@@ -74,6 +90,14 @@ function ProductCard({
       );
       if (response.status === 201) {
         dispatch({ type: "TOGGLE_WISHLIST", payload: response.data.wishlist });
+        authDispatch({
+          type: "SET_TOAST",
+          payload: {
+            type: "snackbar-success",
+            msg: "Added to WishList",
+            toastState: true,
+          },
+        });
       }
     } catch (err) {
       console.log(err);

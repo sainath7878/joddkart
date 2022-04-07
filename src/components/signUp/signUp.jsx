@@ -51,6 +51,14 @@ function SignUp() {
             encodedToken: response.data.encodedToken,
           },
         });
+        authDispatch({
+          type: "SET_TOAST",
+          payload: {
+            type: "snackbar-success",
+            msg: "Sign Up Successful",
+            toastState: true,
+          },
+        });
         dispatch({
           type: "INITIALIZE_CART",
           payload: response.data.createdUser.cart,
