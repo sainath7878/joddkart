@@ -1,70 +1,128 @@
-# Getting Started with Create React App
+<div align="center">
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# JODDKart
 
-## Available Scripts
+</div>
 
-In the project directory, you can run:
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-joddkart">About The Project</a>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#features">Features</a>
+      <ul>
+      <li><a href="#landing-page">Landing Page</a></li>
+        <li><a href="#products-listing-page">Products Listing page</a></li>
+        <li><a href="#wishlist-page">Wishlist Page</a></li>
+        <li><a href="#cart-page">Cart Page</a></li>
+        <li><a href="#authentication">Authentication</a></li>
+      </ul>
+    </li>
+  </ol>
+</details>
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## About JoddKart
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+JODDKart is an E-Commerce platform which is a one stop solution to buy PC, PS4, Xbox Games. JODDKart is publicly hosted on netlify at [https://joddkart-react.netlify.app/](https://joddkart-react.netlify.app/)
 
-### `npm test`
+The website is built using following tech-stack:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<ul>
+    <li>ReactJS</li>
+    <li>React Router v6</li>
+    <li>useContext + useReducer for state management</li>
+    <li>Jodd UI and Vanilla CSS</li>
+    <li>MockBee for mock Backend</li>
+</ul>
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Getting Started
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Installation
 
-### `npm run eject`
+Clone the repository on your local machine by typing the below commands on your terminal and cd to `joddkart`.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```
+git clone https://github.com/sainath7878/joddkart.git
+cd joddkart
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Install the necessary dependencies.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```
+npm install
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+`joddkart` uses `mockbee's` mockbackend.
+Create an environment variable inside .env file in the root of the project with the below code.
 
-## Learn More
+```
+REACT_APP_JWT_SECRET = <JWT_SECRET_KEY_OF_YOUR_CHOICE>
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Now to run the app write the following command in your terminal:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+`npm start`
+This should run the app on localhost:3000.
 
-### Code Splitting
+```
+npm start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+---
 
-### Analyzing the Bundle Size
+## Features
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+---
 
-### Making a Progressive Web App
+### Landing Page
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- User can click on the Category which the user wants to buy
+- User can find Trending Products and add products to cart
 
-### Advanced Configuration
+### Products Listing Page
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- User can filter out products using different filters like
+  - filter by Category
+  - Sort by Price
+  - Slider to filter by Price
+- User can add products to wishlist
+- User can add items to cart
 
-### Deployment
+### WishList Page
+- User can remove products from wishlist.
+- User can add products to cart. If a product is already in cart then user can navigate from wishlist
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Cart Page
+- User can see Cart Summary.
+- User can update quantity of products
+- User can remove products from cart
+- User can move products to wishlist
 
-### `npm run build` fails to minify
+### Authentication
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- User can do a guest login
+- User can Log In/Log Out with existing credentials
+- User can sign up by if they are new to website
+
+## SOCIALS
+
+---
+
+<a href="https://twitter.com/sainath_svm"><img src="https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white"/></a>
+<a href="https://www.linkedin.com/in/svm-sainath-90aa061aa/"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"/></a>
+
+</ul>

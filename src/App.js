@@ -1,8 +1,8 @@
 import './App.css';
 import Mockman from "mockman-js";
 import { Routes, Route } from "react-router-dom";
-import { Authorized } from "./components/index"
-import {LandingPage,ProductsListingPage, CartPage, WishListPage, AuthorizationPage } from "./pages/index"
+import { Authorized, } from "./components/index"
+import { LandingPage, ProductsListingPage, CartPage, WishListPage, AuthorizationPage, NotFound, } from "./pages/index"
 
 function App() {
   return (
@@ -17,6 +17,7 @@ function App() {
         </Route>
         <Route path="/signin" element={<AuthorizationPage />} />
         <Route path="/signup" element={<AuthorizationPage />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );

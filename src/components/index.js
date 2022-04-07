@@ -8,6 +8,8 @@ import { Amount } from "./cart/Amount";
 import { SignIn } from "./signIn/signIn"
 import { SignUp } from "./signUp/signUp"
 import { Authorized } from "./authorization/authorized"
+import { Toast } from "./toast/Toast"
 
 
-export { Header, Footer, Main, CartCard, Cart, EmptyCart, Amount, SignIn, SignUp, Authorized };
+
+export { Header, Footer, Main, CartCard, Cart, EmptyCart, Amount, SignIn, SignUp, Authorized, Toast };

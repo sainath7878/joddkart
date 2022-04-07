@@ -2,6 +2,9 @@
 
 :root {
   --SIDE-NAVBAR-COLOR: #e5e7eb;
+  --Z-INDEX-10: 10;
+  --Z-INDEX-20: 20;
+  --Z-INDEX-30: 30;
 }
 
 a {
