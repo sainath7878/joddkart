@@ -9,8 +9,10 @@ import {
 import { useProducts } from "../../context/product-context";
 import "./CartPage.css";
 import { useAuth } from "../../context";
+import { useDocument } from "../../hooks/useDocument";
 
 function CartPage() {
+  useDocument("Cart")
   const { state } = useProducts();
   const {
     authState: { toast },

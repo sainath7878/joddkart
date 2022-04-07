@@ -9,8 +9,10 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useAuth } from "../../context/auth-context";
 import { useProducts } from "../../context/product-context";
+import { useDocument } from "../../hooks/useDocument";
 
 function SignUp() {
+  useDocument("SignUp");
   useEffect(() => {
     const timeOut = setTimeout(() => {
       setError({ msg: "", state: false });
