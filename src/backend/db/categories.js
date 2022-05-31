@@ -1,5 +1,4 @@
 import { v4 as uuid } from "uuid";
-import { fps, fifa, openWorld, racing } from "../../assets/images/index";
 
 
 /**
@@ -8,8 +7,8 @@ import { fps, fifa, openWorld, racing } from "../../assets/images/index";
  * */
 
 export const categories = [
-  { key: uuid(), name: "FPS", imgSrc: fps },
-  { key: uuid(), name: "RACING", imgSrc: racing },
-  { key: uuid(), name: "OPEN WORLD", imgSrc: openWorld },
-  { key: uuid(), name: "FIFA", imgSrc: fifa },
+  { key: uuid(), name: "FPS", imgSrc: "https://res.cloudinary.com/duy47nrum/image/upload/v1654030436/joddkart/fps_nb2wfa.jpg" },
+  { key: uuid(), name: "RACING", imgSrc: "https://res.cloudinary.com/duy47nrum/image/upload/v1654030437/joddkart/racing_l4lgrv.jpg" },
+  { key: uuid(), name: "OPEN WORLD", imgSrc: "https://res.cloudinary.com/duy47nrum/image/upload/v1654030438/joddkart/openworld_xzekhx.jpg" },
+  { key: uuid(), name: "FIFA", imgSrc: "https://res.cloudinary.com/duy47nrum/image/upload/v1654030436/joddkart/fifa_jmf5xl.jpg" },
 ];

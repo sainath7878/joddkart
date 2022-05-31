@@ -4,15 +4,15 @@ import {
   BiEyeFill,
   BiEyeSlashFill,
 } from "../../assets/icons/Icons";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useAuth, useProducts } from "../../context/index";
 import axios from "axios";
 import { useDocument } from "../../hooks/useDocument";
+import { toast } from "react-toastify";
 
 function SignIn() {
-
-  useDocument("SignIn")
+  useDocument("SignIn");
   const [loginDetails, setLoginDetails] = useState({
     email: "",
     password: "",
@@ -22,6 +22,8 @@ function SignIn() {
   const { dispatch } = useProducts();
   const navigate = useNavigate();
   const [error, setError] = useState({ msg: "", state: false });
+  const location = useLocation();
+  const from = location?.state?.from || "/";
 
   useEffect(() => {
     const timeOut = setTimeout(() => {
@@ -47,14 +49,7 @@ function SignIn() {
             encodedToken: response.data.encodedToken,
           },
         });
-        authDispatch({
-          type: "SET_TOAST",
-          payload: {
-            type: "snackbar-success",
-            msg: "Sign In Successful",
-            toastState: true,
-          },
-        });
+        toast.success("Login Successful");
         dispatch({
           type: "INITIALIZE_CART",
           payload: response.data.foundUser.cart,
@@ -63,7 +58,7 @@ function SignIn() {
           type: "INITIALIZE_WISHLIST",
           payload: response.data.foundUser.wishlist,
         });
-        navigate("/products", { replace: true });
+        navigate(`${from}`, { replace: true });
       }
     } catch (err) {
       console.log("Error while signin In ", err);

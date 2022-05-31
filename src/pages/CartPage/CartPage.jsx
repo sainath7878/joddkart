@@ -1,26 +1,18 @@
 import {
-  Header,
-  Footer,
   Cart,
   EmptyCart,
   Amount,
-  Toast,
 } from "../../components/index";
 import { useProducts } from "../../context/product-context";
 import "./CartPage.css";
-import { useAuth } from "../../context";
 import { useDocument } from "../../hooks/useDocument";
 
 function CartPage() {
   useDocument("Cart")
   const { state } = useProducts();
-  const {
-    authState: { toast },
-  } = useAuth();
+
   return (
     <>
-      <Header />
-      {toast.toastState && <Toast />}
       <h1 className="fs-xl text-align-center">
         My Cart ({state.cart.length}) items
       </h1>
@@ -37,7 +29,6 @@ function CartPage() {
           </div>
         </section>
       )}
-      <Footer />
     </>
   );
 }

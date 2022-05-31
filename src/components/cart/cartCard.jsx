@@ -1,6 +1,6 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 import { BiDashLg, BiPlusLg, BiTrashFill } from "../../assets/icons/Icons";
-import { useAuth } from "../../context";
 import { useProducts } from "../../context/product-context";
 
 function CartCard({
@@ -15,7 +15,6 @@ function CartCard({
 }) {
   const encodedToken = localStorage.getItem("token");
   const { dispatch, state } = useProducts();
-  const { authDispatch } = useAuth();
   const removeFromCart = async (item) => {
     try {
       const response = await axios.delete(`/api/user/cart/${item._id}`, {
@@ -28,17 +27,10 @@ function CartCard({
           type: "DELETE_FROM_CART",
           payload: response.data.cart,
         });
-        authDispatch({
-          type: "SET_TOAST",
-          payload: {
-            type: "snackbar-danger",
-            msg: "Removed from Cart",
-            toastState: true,
-          },
-        });
+        toast.info("Item removed from cart");
       }
     } catch (err) {
-      console.log(err);
+      toast.error(err.response.data.errors[0]);
     }
   };
 
@@ -60,17 +52,10 @@ function CartCard({
         );
         if (response.status === 200) {
           dispatch({ type: "INCREMENT_QTY", payload: response.data.cart });
-          authDispatch({
-            type: "SET_TOAST",
-            payload: {
-              type: "snackbar-info",
-              msg: "Quantity Updated",
-              toastState: true,
-            },
-          });
+          toast.success("Quantity Updated");
         }
       } catch (err) {
-        console.log(err);
+        toast.error(err.response.data.errors[0]);
       }
     } else {
       try {
@@ -89,17 +74,10 @@ function CartCard({
         );
         if (response.status === 200) {
           dispatch({ type: "DECREMENT_QTY", payload: response.data.cart });
-          authDispatch({
-            type: "SET_TOAST",
-            payload: {
-              type: "snackbar-info",
-              msg: "Quantity Updated",
-              toastState: true,
-            },
-          });
+          toast.success("Quantity decreased");
         }
       } catch (err) {
-        console.log(err);
+        toast.error(err.response.data.errors[0]);
       }
     }
   };
@@ -118,17 +96,10 @@ function CartCard({
       );
       if (response.status === 201) {
         dispatch({ type: "ADD_TO_WISHLIST", payload: response.data.wishlist });
-        authDispatch({
-          type: "SET_TOAST",
-          payload: {
-            type: "snackbar-success",
-            msg: "Moved to WishList",
-            toastState: true,
-          },
-        });
+        toast.info("Item moved to wishlist");
       }
     } catch (err) {
-      console.log(err);
+      toast.error(err.response.data.errors[0]);
     }
   };
   return (

@@ -1,4 +1,4 @@
-import { Header, Footer, SignIn, SignUp } from "../../components/index";
+import { SignIn, SignUp } from "../../components/index";
 import { useLocation } from "react-router-dom";
 import "./authorizationPage.css";
 
@@ -7,11 +7,9 @@ function AuthorizationPage() {
   return (
     <>
       <div className="authorization">
-        <Header />
         <div className="flex-1">
           {location.pathname === "/signin" ? <SignIn /> : <SignUp />}
         </div>
-        <Footer />
       </div>
     </>
   );

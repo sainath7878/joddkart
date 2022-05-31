@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import "./header.css";
 
@@ -12,27 +12,41 @@ import {
 } from "../../assets/icons/Icons";
 import { useProducts } from "../../context/product-context";
 import { useAuth } from "../../context/auth-context";
+import { useState } from "react";
+import { toast } from "react-toastify";
+import { useRef } from "react";
 
 function Header() {
   const { state, dispatch } = useProducts();
   const { authState, authDispatch } = useAuth();
   const navigate = useNavigate();
+  const [search, setSearch] = useState("");
+  const timerId = useRef();
+  const location = useLocation();
 
   const logoutHandler = () => {
     authDispatch({ type: "LOGOUT" });
     dispatch({ type: "INITIALIZE_WISHLIST", payload: [] });
     dispatch({ type: "INITIALIZE_CART", payload: [] });
-    authDispatch({
-      type: "SET_TOAST",
-      payload: {
-        type: "snackbar-danger",
-        msg: "Logged Out",
-        toastState: true,
-      },
-    });
-    localStorage.removeItem("token")
+    toast.error("Logged out");
+    localStorage.removeItem("token");
     navigate("/");
   };
+
+  const searchHandler = () => {
+    dispatch({ type: "SET_SEARCH", payload: search });
+  };
+
+  const debounce = (callback, delay = 500) => {
+    return function () {
+      clearTimeout(timerId.current);
+      timerId.current = setTimeout(() => {
+        callback();
+      }, delay);
+    };
+  };
+
+  const debounceMethod = debounce(searchHandler, 500);
 
   return (
     <div>
@@ -68,6 +82,11 @@ function Header() {
               type="text"
               placeholder="Search for games"
               className="form-input nav-search mr-sm"
+              onChange={(event) => {
+                location.pathname !== "/products" && navigate("/products");
+                setSearch(() => event.target.value);
+              }}
+              onKeyUp={debounceMethod}
             />
             <Link to="/wishList">
               <div className="badge mr-sm">
@@ -108,6 +127,7 @@ function Header() {
             type="text"
             placeholder="Search for games"
             className="form-input"
+            onChange={(event) => searchHandler(event)}
           />
         </div>
       </header>

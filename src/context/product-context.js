@@ -1,7 +1,8 @@
 import axios from "axios";
 import { createContext, useContext, useEffect, useReducer, } from "react";
+import { toast } from "react-toastify";
 import { reducerFunc, initialState } from "../reducer/filterReducer";
-import { getSortedData, getFilteredData } from "../utils/filter-functions/index";
+import { getSortedData, getFilteredData, getSearchedData } from "../utils/filter-functions/index";
 
 
 const ProductContext = createContext();
@@ -20,7 +21,7 @@ function ProductsProvider({ children }) {
                 dispatch({ type: "INITIALIZE_PRODUCTS", payload: data.products })
                 dispatch({ type: "LOADER", payload: false })
             } catch (err) {
-                console.log(err);
+                toast.error(err.response.data.errors[0]);
             }
         })()
     }, [])
@@ -36,15 +37,16 @@ function ProductsProvider({ children }) {
                 if (response.status === 200) {
                     dispatch({ type: "INITIALIZE_CART", payload: response.data.cart });
                 }
-            }catch (err) {
-                console.log(err);
+            } catch (err) {
+                toast.error(err.response.data.errors[0]);
             }
         })();
     }, [dispatch, encodedToken]);
 
 
     const sortedData = getSortedData(state.allProducts, state.filters["sortBy"])
-    const filteredData = getFilteredData(sortedData, state.filters);
+    const searchedData = getSearchedData(sortedData, state.filters.search);
+    const filteredData = getFilteredData(searchedData, state.filters);
 
     return (
         <ProductContext.Provider value={{ filteredData, state, dispatch }}>

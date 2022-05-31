@@ -6,7 +6,8 @@ export const initialState = {
         categories: [],
         includeOutOfStock: false,
         rating: null,
-        priceRange: 2000,
+        priceRange: 5000,
+        search: "",
     },
     cart: [],
     wishList: []
@@ -29,7 +30,8 @@ const reducerFunc = (state, { type, payload }) => {
             return {
                 ...state, filters: { ...filters, categories: filters.categories.concat(payload) }
             }
-
+        case "SET_SEARCH":
+            return { ...state, filters: { ...filters, search: payload } }
         case "SORT_BY":
             return {
                 ...state, filters: { ...filters, sortBy: payload }
