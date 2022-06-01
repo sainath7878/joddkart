@@ -4,15 +4,18 @@ import {
   BiEyeFill,
   BiEyeSlashFill,
 } from "../../assets/icons/Icons";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useAuth } from "../../context/auth-context";
 import { useProducts } from "../../context/product-context";
 import { useDocument } from "../../hooks/useDocument";
+import { toast } from "react-toastify";
 
 function SignUp() {
   useDocument("SignUp");
+  const location = useLocation();
+  const from = location?.state || "/";
   useEffect(() => {
     const timeOut = setTimeout(() => {
       setError({ msg: "", state: false });
@@ -53,14 +56,7 @@ function SignUp() {
             encodedToken: response.data.encodedToken,
           },
         });
-        authDispatch({
-          type: "SET_TOAST",
-          payload: {
-            type: "snackbar-success",
-            msg: "Sign Up Successful",
-            toastState: true,
-          },
-        });
+        toast.success("SignUp Successful");
         dispatch({
           type: "INITIALIZE_CART",
           payload: response.data.createdUser.cart,
@@ -69,7 +65,7 @@ function SignUp() {
           type: "INITIALIZE_WISHLIST",
           payload: response.data.createdUser.wishlist,
         });
-        navigate("/products", { replace: true });
+        navigate(`${from}`, { replace: true });
       }
     } catch (err) {
       setError({ msg: "Try again after some time", status: true });

@@ -27,7 +27,6 @@ const authReducer = (authState, { type, payload }) => {
                 email: "",
                 encodedToken: "",
             }
-
         case "SET_TOAST":
             return { ...authState, toast: { type: payload.type, msg: payload.msg, toastState: payload.toastState } }
 

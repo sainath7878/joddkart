@@ -1,3 +1,4 @@
+import { InfinitySpin } from "react-loader-spinner";
 import { useProducts } from "../../context/product-context";
 import { ProductCard } from "../productCard/productCard";
 
@@ -6,8 +7,11 @@ function AllProducts() {
 
   return (
     <>
-      {state.loader && <h1 className="fs-xl">Fetching data!</h1>}
-      {filteredData.length > 0 ? (
+      {state.loader ? (
+        <div className="loader">
+          <InfinitySpin color="#a40ae0" />
+        </div>
+      ) : filteredData.length > 0 ? (
         filteredData.map((item) => {
           const {
             _id,

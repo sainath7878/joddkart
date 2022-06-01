@@ -3,7 +3,8 @@ import { cartSolid } from "../../assets/images/index";
 import { BiHeartFill, BiXLg, BiStarFill } from "../../assets/icons/Icons";
 import { useProducts, useAuth } from "../../context/index";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function ProductCard({
   imgSrc,
@@ -20,9 +21,11 @@ function ProductCard({
   item,
 }) {
   const { state, dispatch } = useProducts();
-  const { authState, authDispatch } = useAuth();
+  const { authState } = useAuth();
   const navigate = useNavigate();
   const encodedToken = localStorage.getItem("token");
+  const location = useLocation();
+  const from = location?.pathname || "/";
 
   const addToCart = async (item) => {
     try {
@@ -37,17 +40,10 @@ function ProductCard({
       );
       if (response.status === 201) {
         dispatch({ type: "ADD_ITEM_TO_CART", payload: response.data.cart });
-        authDispatch({
-          type: "SET_TOAST",
-          payload: {
-            type: "snackbar-success",
-            msg: "Added to Cart",
-            toastState: true,
-          },
-        });
+        toast.success("Item added to cart");
       }
     } catch (err) {
-      console.log(err);
+      toast.error(err.response.data.errors[0]);
     }
   };
   const removeFromWishList = async (item) => {
@@ -63,17 +59,10 @@ function ProductCard({
           type: "TOGGLE_WISHLIST",
           payload: response.data.wishlist,
         });
-        authDispatch({
-          type: "SET_TOAST",
-          payload: {
-            type: "snackbar-danger",
-            msg: "Removed from WishList",
-            toastState: true,
-          },
-        });
+        toast.info("Item removed from wishlist");
       }
     } catch (err) {
-      console.log(err);
+      toast.error(err.response.data.errors[0]);
     }
   };
 
@@ -90,17 +79,10 @@ function ProductCard({
       );
       if (response.status === 201) {
         dispatch({ type: "TOGGLE_WISHLIST", payload: response.data.wishlist });
-        authDispatch({
-          type: "SET_TOAST",
-          payload: {
-            type: "snackbar-success",
-            msg: "Added to WishList",
-            toastState: true,
-          },
-        });
+        toast.success("Item added to wishlist");
       }
     } catch (err) {
-      console.log(err);
+      toast.error(err.response.data.errors[0]);
     }
   };
 
@@ -139,7 +121,9 @@ function ProductCard({
               ) : (
                 <button
                   className="btn btn-secondary d-flex-center"
-                  onClick={() => navigate("/signin", { replace: true })}
+                  onClick={() =>
+                    navigate("/signin", { replace: true, state: { from } })
+                  }
                 >
                   <img src={cartSolid} alt="cart" className="btn-icon" />
                   Add to Cart
