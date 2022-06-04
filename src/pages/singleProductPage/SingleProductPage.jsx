@@ -3,11 +3,8 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { InfinitySpin } from "react-loader-spinner";
 import { useParams } from "react-router-dom";
-import {
-  MdiCash100,
-  MdiTag,
-  MdiTruck,
-} from "../../assets/icons/Icons";
+import { MdiCash100, MdiTag, MdiTruck } from "../../assets/icons/Icons";
+import { cartSolid } from "../../assets/images/index";
 import { useProducts } from "../../context";
 import "./singleProductPage.css";
 
@@ -60,25 +57,33 @@ function SingleProductPage() {
             <div className="perks">
               {perksData.map((item) => {
                 return (
-                    <p className="fs-m">
-                        <item.icon  className="mr-sm"/>
-                        {item.text}
-                    </p>
+                  <p className="fs-m">
+                    <item.icon className="mr-sm" />
+                    {item.text}
+                  </p>
                 );
               })}
             </div>
             <div className="cta">
-              <button
-                className="btn btn-secondary mr-sm"
-                disabled={cart.find(
-                  (cartItem) => cartItem._id === singleProduct._id
-                )}
-                onClick={(event) => addToCart(event, singleProduct)}
-              >
-                {cart.find((cartItem) => cartItem._id === singleProduct._id)
-                  ? "Go to Cart"
-                  : "Add to Cart"}
-              </button>
+              {singleProduct.inStock ? (
+                <button
+                  className="btn btn-secondary mr-sm"
+                  disabled={cart.find(
+                    (cartItem) => cartItem._id === singleProduct._id
+                  )}
+                  onClick={(event) => addToCart(event, singleProduct)}
+                >
+                  {cart.find((cartItem) => cartItem._id === singleProduct._id)
+                    ? "Go to Cart"
+                    : "Add to Cart"}
+                </button>
+              ) : (
+                <button className="btn btn-primary d-flex-center" disabled>
+                  <img src={cartSolid} alt="cart" className="btn-icon " /> Out
+                  Of Stock
+                </button>
+              )}
+
               <button
                 className="btn btn-primary mr-sm "
                 disabled={wishList.find(

@@ -27,7 +27,7 @@ function ProductCard({
 
   return (
     <div className="card">
-      <Link to={`${_id}`}>
+      <Link to={`/products/${_id}`}>
         <img src={imgSrc} alt={name} className="card-image" />
       </Link>
       <h1 className="fs-s card-text-highlight">{name}</h1>
