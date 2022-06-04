@@ -27,6 +27,7 @@ function AllProducts() {
           return (
             <ProductCard
               key={_id}
+              _id={_id}
               name={name}
               imgSrc={imgSrc}
               description={description}

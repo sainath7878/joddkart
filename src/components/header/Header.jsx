@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 
 import "./header.css";
 
@@ -48,6 +48,10 @@ function Header() {
 
   const debounceMethod = debounce(searchHandler, 500);
 
+  const getActiveStyle = (isActive) => {
+    return isActive ? { color: "#a40ae0" } : null;
+  };
+
   return (
     <div>
       <header>
@@ -56,24 +60,34 @@ function Header() {
             <button className="btn btn-secondary d-none mobile-view hamburger">
               <BiList className="fs-m" />
             </button>
-            <Link to="/">
+            <NavLink to="/">
               <p className="nav-brand-link mr-sm">
                 {" "}
                 JODD<span className="brand-text">Kart</span>
               </p>
-            </Link>
+            </NavLink>
             <ul className="d-inline-block d-flex align-center">
-              <Link to="/">
+              <NavLink
+                className="nav-link"
+                to="/"
+                style={({ isActive }) =>
+                  isActive ? { color: "#a40ae0" } : null
+                }
+              >
                 <li className="d-inline-block fs-s mr-sm">
-                  <p className="nav-link">Home</p>
+                  <p>Home</p>
                 </li>
-              </Link>
+              </NavLink>
 
-              <Link to="/products">
+              <NavLink
+                className="nav-link"
+                to="/products"
+                style={({ isActive }) => getActiveStyle(isActive)}
+              >
                 <li className="d-inline-block fs-s mr-sm">
-                  <p className="nav-link">Shop Now</p>
+                  <p>Shop Now</p>
                 </li>
-              </Link>
+              </NavLink>
             </ul>
           </div>
 
@@ -88,7 +102,7 @@ function Header() {
               }}
               onKeyUp={debounceMethod}
             />
-            <Link to="/wishList">
+            <NavLink to="/wishList">
               <div className="badge mr-sm">
                 <BiHeartFill className="fs-m nav-link" />
                 {authState.isLoggedIn ? (
@@ -97,9 +111,9 @@ function Header() {
                   </span>
                 ) : null}
               </div>
-            </Link>
+            </NavLink>
 
-            <Link to="/cart">
+            <NavLink to="/cart">
               <div className="badge mr-sm">
                 <BiCartFill className="fs-m nav-link" />
                 {authState.isLoggedIn ? (
@@ -108,7 +122,7 @@ function Header() {
                   </span>
                 ) : null}
               </div>
-            </Link>
+            </NavLink>
 
             {authState.isLoggedIn ? (
               <IcBaselineLogout
@@ -116,9 +130,9 @@ function Header() {
                 onClick={() => logoutHandler()}
               />
             ) : (
-              <Link to="/signin">
+              <NavLink to="/signin">
                 <BiPersonFill className="fs-m nav-link" />
-              </Link>
+              </NavLink>
             )}
           </div>
         </nav>
@@ -127,7 +141,11 @@ function Header() {
             type="text"
             placeholder="Search for games"
             className="form-input"
-            onChange={(event) => searchHandler(event)}
+            onChange={(event) => {
+              location.pathname !== "/products" && navigate("/products");
+              setSearch(() => event.target.value);
+            }}
+            onKeyUp={debounceMethod}
           />
         </div>
       </header>

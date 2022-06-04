@@ -2,9 +2,7 @@ import "./productCard.css";
 import { cartSolid } from "../../assets/images/index";
 import { BiHeartFill, BiXLg, BiStarFill } from "../../assets/icons/Icons";
 import { useProducts, useAuth } from "../../context/index";
-import axios from "axios";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 
 function ProductCard({
   imgSrc,
@@ -19,76 +17,19 @@ function ProductCard({
   rating,
   inStock,
   item,
+  _id,
 }) {
-  const { state, dispatch } = useProducts();
+  const { state, addToWishList, addToCart, removeFromWishList } = useProducts();
   const { authState } = useAuth();
   const navigate = useNavigate();
-  const encodedToken = localStorage.getItem("token");
   const location = useLocation();
   const from = location?.pathname || "/";
 
-  const addToCart = async (item) => {
-    try {
-      const response = await axios.post(
-        "/api/user/cart",
-        { product: item },
-        {
-          headers: {
-            authorization: encodedToken,
-          },
-        }
-      );
-      if (response.status === 201) {
-        dispatch({ type: "ADD_ITEM_TO_CART", payload: response.data.cart });
-        toast.success("Item added to cart");
-      }
-    } catch (err) {
-      toast.error(err.response.data.errors[0]);
-    }
-  };
-  const removeFromWishList = async (item) => {
-    try {
-      const response = await axios.delete(`/api/user/wishlist/${item._id}`, {
-        headers: {
-          authorization: encodedToken,
-        },
-      });
-      if (response.status === 200) {
-        item.isInWishList = false;
-        dispatch({
-          type: "TOGGLE_WISHLIST",
-          payload: response.data.wishlist,
-        });
-        toast.info("Item removed from wishlist");
-      }
-    } catch (err) {
-      toast.error(err.response.data.errors[0]);
-    }
-  };
-
-  const addToWishList = async (item) => {
-    try {
-      const response = await axios.post(
-        "/api/user/wishlist",
-        { product: item },
-        {
-          headers: {
-            authorization: encodedToken,
-          },
-        }
-      );
-      if (response.status === 201) {
-        dispatch({ type: "TOGGLE_WISHLIST", payload: response.data.wishlist });
-        toast.success("Item added to wishlist");
-      }
-    } catch (err) {
-      toast.error(err.response.data.errors[0]);
-    }
-  };
-
   return (
     <div className="card">
-      <img src={imgSrc} alt={name} className="card-image" />
+      <Link to={`${_id}`}>
+        <img src={imgSrc} alt={name} className="card-image" />
+      </Link>
       <h1 className="fs-s card-text-highlight">{name}</h1>
       <p className="fs-s">{description}</p>
       <p className="fs-s">
@@ -113,7 +54,7 @@ function ProductCard({
               {authState.isLoggedIn ? (
                 <button
                   className="btn btn-secondary d-flex-center"
-                  onClick={() => addToCart(item)}
+                  onClick={(event) => addToCart(event, item)}
                 >
                   <img src={cartSolid} alt="cart" className="btn-icon" />
                   Add to Cart
@@ -138,23 +79,36 @@ function ProductCard({
           </button>
         )}
       </div>
-      <button className="card-btn-dismiss">
-        {wishlist &&
-          (state.wishList.find(
-            (wishListItem) => wishListItem._id === item._id
-          ) ? (
-            <BiHeartFill
-              className={"fs-m inWishList"}
-              onClick={() => removeFromWishList(item)}
-            />
-          ) : (
-            <BiHeartFill
-              className={"fs-m"}
-              onClick={() => addToWishList(item)}
-            />
-          ))}
-        {dismiss && <BiXLg className="fs-m" />}
-      </button>
+      {authState.isLoggedIn ? (
+        <button className="card-btn-dismiss">
+          {wishlist &&
+            (state.wishList.find(
+              (wishListItem) => wishListItem._id === item._id
+            ) ? (
+              <BiHeartFill
+                className={"fs-m inWishList"}
+                onClick={(event) => removeFromWishList(event, item)}
+              />
+            ) : (
+              <BiHeartFill
+                className={"fs-m"}
+                onClick={(event) => addToWishList(event, item)}
+              />
+            ))}
+          {dismiss && <BiXLg className="fs-m" />}
+        </button>
+      ) : (
+        <button className="card-btn-dismiss">
+          {" "}
+          <BiHeartFill
+            className={"fs-m"}
+            onClick={() =>
+              navigate("/signin", { replace: true, state: { from } })
+            }
+          />
+        </button>
+      )}
+
       {badge && <span className="card-badge">On Sale</span>}
     </div>
   );

@@ -2,11 +2,22 @@ import './App.css';
 import Mockman from "mockman-js";
 import { Routes, Route } from "react-router-dom";
 import { Authorized, Footer, Header, } from "./components/index"
-import { LandingPage, ProductsListingPage, CartPage, WishListPage, AuthorizationPage, NotFound, } from "./pages/index"
+import { LandingPage, ProductsListingPage, CartPage, WishListPage, AuthorizationPage, NotFound, SingleProductPage, } from "./pages/index"
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useEffect } from 'react';
+import { useAuth } from './context';
 
 function App() {
+  const { authDispatch } = useAuth();
+
+  const token = localStorage.getItem("token");
+  useEffect(() => {
+    if (token) {
+      authDispatch({ type: "SET_USER", payload: { encodedToken: token } })
+    }
+  }, [authDispatch, token])
+
   return (
     <div className="App">
       <Header />
@@ -15,6 +26,7 @@ function App() {
         <Route path="/mockman" element={<Mockman />} />
         <Route path="/" element={<LandingPage />} />
         <Route path="/products" element={<ProductsListingPage />} />
+        <Route path="/products/:productid" element={<SingleProductPage />} />
         <Route element={<Authorized />}>
           <Route path="/cart" element={<CartPage />} />
           <Route path="/wishList" element={<WishListPage />} />
