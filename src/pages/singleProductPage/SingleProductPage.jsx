@@ -2,10 +2,10 @@ import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
 import { InfinitySpin } from "react-loader-spinner";
-import { useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { MdiCash100, MdiTag, MdiTruck } from "../../assets/icons/Icons";
 import { cartSolid } from "../../assets/images/index";
-import { useProducts } from "../../context";
+import { useAuth, useProducts } from "../../context";
 import "./singleProductPage.css";
 
 function SingleProductPage() {
@@ -16,12 +16,19 @@ function SingleProductPage() {
     addToCart,
     addToWishList,
   } = useProducts();
+  const {
+    authState: { isLoggedIn },
+  } = useAuth();
+  const location = useLocation();
+  const from = location?.pathname;
 
   const perksData = [
     { icon: MdiTruck, text: "Fast & No-contact Delivery" },
     { icon: MdiTag, text: "Price displayed is inclusive of GST" },
     { icon: MdiCash100, text: "Cash on Delivery available" },
   ];
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     (async () => {
@@ -55,9 +62,9 @@ function SingleProductPage() {
             </p>
             <div className="underline"></div>
             <div className="perks">
-              {perksData.map((item) => {
+              {perksData.map((item, index) => {
                 return (
-                  <p className="fs-m">
+                  <p key={index} className="fs-m">
                     <item.icon className="mr-sm" />
                     {item.text}
                   </p>
@@ -66,17 +73,34 @@ function SingleProductPage() {
             </div>
             <div className="cta">
               {singleProduct.inStock ? (
-                <button
-                  className="btn btn-secondary mr-sm"
-                  disabled={cart.find(
+                isLoggedIn ? (
+                  cart.find(
                     (cartItem) => cartItem._id === singleProduct._id
-                  )}
-                  onClick={(event) => addToCart(event, singleProduct)}
-                >
-                  {cart.find((cartItem) => cartItem._id === singleProduct._id)
-                    ? "Go to Cart"
-                    : "Add to Cart"}
-                </button>
+                  ) ? (
+                    <button
+                      className="btn btn-secondary mr-sm"
+                      onClick={() => navigate("/cart")}
+                    >
+                      Go to Cart
+                    </button>
+                  ) : (
+                    <button
+                      className="btn btn-secondary mr-sm"
+                      onClick={(event) => addToCart(event, singleProduct)}
+                    >
+                      Add to Cart
+                    </button>
+                  )
+                ) : (
+                  <button
+                    className="btn btn-secondary mr-sm"
+                    onClick={() =>
+                      navigate("/signin", { state: { from }, replace: true })
+                    }
+                  >
+                    Add To Cart
+                  </button>
+                )
               ) : (
                 <button className="btn btn-primary d-flex-center" disabled>
                   <img src={cartSolid} alt="cart" className="btn-icon " /> Out
@@ -84,19 +108,34 @@ function SingleProductPage() {
                 </button>
               )}
 
-              <button
-                className="btn btn-primary mr-sm "
-                disabled={wishList.find(
+              {isLoggedIn ? (
+                wishList.find(
                   (wishListItem) => wishListItem._id === singleProduct._id
-                )}
-                onClick={(event) => addToWishList(event, singleProduct)}
-              >
-                {wishList.find(
-                  (wishListItem) => wishListItem._id === singleProduct._id
+                ) ? (
+                  <button
+                    className="btn btn-secondary-outline mr-sm "
+                    onClick={() => navigate("/wishList")}
+                  >
+                    Go to WishList
+                  </button>
+                ) : (
+                  <button
+                    className="btn btn-secondary-outline mr-sm "
+                    onClick={(event) => addToWishList(event, singleProduct)}
+                  >
+                    Add to WishList
+                  </button>
                 )
-                  ? "Go to WishList"
-                  : "Add to WishList"}
-              </button>
+              ) : (
+                <button
+                  className="btn btn-secondary-outline mr-sm"
+                  onClick={() =>
+                    navigate("/signin", { state: { from }, replace: true })
+                  }
+                >
+                  Add To Wishlist
+                </button>
+              )}
             </div>
           </div>
         </div>

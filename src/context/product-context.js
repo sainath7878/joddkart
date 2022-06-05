@@ -88,20 +88,22 @@ function ProductsProvider({ children }) {
     }, [])
 
     useEffect(() => {
-        (async () => {
-            try {
-                const response = await axios.get("/api/user/cart", {
-                    headers: {
-                        authorization: encodedToken,
-                    },
-                });
-                if (response.status === 200) {
-                    dispatch({ type: "INITIALIZE_CART", payload: response.data.cart });
+        if (encodedToken) {
+            (async () => {
+                try {
+                    const response = await axios.get("/api/user/cart", {
+                        headers: {
+                            authorization: encodedToken,
+                        },
+                    });
+                    if (response.status === 200) {
+                        dispatch({ type: "INITIALIZE_CART", payload: response.data.cart });
+                    }
+                } catch (err) {
+                    toast.error(err.response.data.errors[0]);
                 }
-            } catch (err) {
-                toast.error(err.response.data.errors[0]);
-            }
-        })();
+            })();
+        }
     }, [dispatch, encodedToken]);
 
 
