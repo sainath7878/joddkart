@@ -115,6 +115,8 @@ function Filter() {
               name="rating"
               className="form-checkbox"
               onChange={() => dispatch({ type: "RATINGS", payload: 1 })}
+              value="1"
+              checked={state.filters["rating"] === Number("1")}
             />
             1 <BiStarFill className="fs-s" /> and Above
           </label>
@@ -126,6 +128,8 @@ function Filter() {
               name="rating"
               className="form-checkbox"
               onChange={() => dispatch({ type: "RATINGS", payload: 2 })}
+              value="2"
+              checked={state.filters["rating"] === Number("2")}
             />
             2 <BiStarFill className="fs-s" /> and Above
           </label>
@@ -137,6 +141,8 @@ function Filter() {
               name="rating"
               className="form-checkbox"
               onChange={() => dispatch({ type: "RATINGS", payload: 3 })}
+              value="3"
+              checked={state.filters["rating"] === Number("3")}
             />
             3 <BiStarFill className="fs-s" /> and Above
           </label>
@@ -148,6 +154,8 @@ function Filter() {
               name="rating"
               className="form-checkbox"
               onChange={() => dispatch({ type: "RATINGS", payload: 4 })}
+              value="4"
+              checked={state.filters["rating"] === Number("4")}
             />
             4 <BiStarFill className="fs-s" /> and Above
           </label>

@@ -46,7 +46,7 @@ function Amount() {
         <h3>Total Amount</h3>
         <h3>₹{totalDiscount}</h3>
       </div>
-      <button className="btn btn-secondary">PLACE ORDER</button>
+      <button className="btn btn-secondary">CHECKOUT</button>
     </>
   );
 }
