@@ -54,7 +54,7 @@ function ProductCard({
               {authState.isLoggedIn ? (
                 <button
                   className="btn btn-secondary d-flex-center"
-                  onClick={(event) => addToCart(event, item)}
+                  onClick={() => addToCart(item)}
                 >
                   <img src={cartSolid} alt="cart" className="btn-icon" />
                   Add to Cart
@@ -87,12 +87,12 @@ function ProductCard({
             ) ? (
               <BiHeartFill
                 className={"fs-m inWishList"}
-                onClick={(event) => removeFromWishList(event, item)}
+                onClick={() => removeFromWishList(item)}
               />
             ) : (
               <BiHeartFill
                 className={"fs-m"}
-                onClick={(event) => addToWishList(event, item)}
+                onClick={() => addToWishList(item)}
               />
             ))}
           {dismiss && <BiXLg className="fs-m" />}

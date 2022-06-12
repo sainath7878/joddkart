@@ -10,11 +10,15 @@ export const initialState = {
         search: "",
     },
     cart: [],
-    wishList: []
+    wishList: [],
+    addresses: {
+        address: [],
+        selectedAddress: {}
+    }
 }
 
 
-const reducerFunc = (state, { type, payload }) => {
+const globalReducer = (state, { type, payload }) => {
     const { filters } = state
 
     switch (type) {
@@ -93,9 +97,17 @@ const reducerFunc = (state, { type, payload }) => {
             return {
                 ...state, wishList: payload
             }
+        case "SET_ADDRESS":
+            return {
+                ...state, addresses: { ...state.addresses, address: payload }
+            }
+        case "SET_SELECTED_ADDRESS":
+            return {
+                ...state, addresses: { ...state.addresses, selectedAddress: payload }
+            }
         default:
             return state
     }
 }
 
-export { reducerFunc };
+export { globalReducer };

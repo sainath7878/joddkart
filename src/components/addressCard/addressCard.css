@@ -1,0 +1,26 @@
+.address-container {
+  border: 1px solid var(--BORDER-COLOR);
+  border-radius: 5px;
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 2rem;
+
+  position: relative;
+  cursor: pointer;
+}
+
+.address-input {
+  position: absolute;
+  top: 1.5rem;
+  left: 1rem;
+}
+
+.address-label {
+  display: inline-block;
+  padding-left: 2rem;
+  cursor: pointer;
+}
+
+.address-label > * {
+  margin-bottom: 5px;
+}

@@ -4,4 +4,5 @@ export { LandingPage } from "./landingPage/LandingPage";
 export { ProductsListingPage } from "./productsListingPage/productListing";
 export { WishListPage } from "./wishlistPage/WishListPage";
 export { NotFound } from "./notFound/NotFound";
-export { SingleProductPage } from "./singleProductPage/SingleProductPage"
+export { SingleProductPage } from "./singleProductPage/SingleProductPage";
+export { CheckOut } from "./checkout/CheckOut";

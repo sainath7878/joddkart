@@ -1,7 +1,7 @@
 import axios from "axios";
 import { createContext, useContext, useEffect, useReducer, } from "react";
 import { toast } from "react-toastify";
-import { reducerFunc, initialState } from "../reducer/filterReducer";
+import { globalReducer, initialState } from "../reducer/globalReducer";
 import { getSortedData, getFilteredData, getSearchedData } from "../utils/index";
 
 
@@ -10,9 +10,9 @@ const ProductContext = createContext();
 function ProductsProvider({ children }) {
 
     const encodedToken = localStorage.getItem("token");
-    const [state, dispatch] = useReducer(reducerFunc, initialState);
+    const [state, dispatch] = useReducer(globalReducer, initialState);
 
-    const addToWishList = async (e, item) => {
+    const addToWishList = async (item) => {
         try {
             const response = await axios.post(
                 "/api/user/wishlist",
@@ -32,7 +32,7 @@ function ProductsProvider({ children }) {
         }
     };
 
-    const removeFromWishList = async (e, item) => {
+    const removeFromWishList = async (item) => {
         try {
             const response = await axios.delete(`/api/user/wishlist/${item._id}`, {
                 headers: {
@@ -52,8 +52,7 @@ function ProductsProvider({ children }) {
         }
     };
 
-    const addToCart = async (e, item) => {
-        e.preventDefault();
+    const addToCart = async (item) => {
         try {
             const response = await axios.post(
                 "/api/user/cart",
@@ -69,7 +68,8 @@ function ProductsProvider({ children }) {
                 toast.success("Item added to cart");
             }
         } catch (err) {
-            toast.error(err.response.data.errors[0]);
+            console.log(err);
+            // toast.error(err.response.data.errors[0]);
         }
     };
 
