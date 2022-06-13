@@ -1,0 +1,27 @@
+.address-modal {
+  position: absolute;
+  top: 10%;
+  left: 40%;
+  z-index: var(--Z-INDEX-10);
+
+  width: 40rem;
+  background-color: whitesmoke;
+  padding: 2rem;
+  border-radius: 5px;
+}
+
+.close-cta-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.address-cta {
+  display: flex;
+  justify-content: space-between;
+}
+
+.close-cta {
+  background-color: transparent;
+  cursor: pointer;
+}

@@ -1,0 +1,61 @@
+.checkout-container {
+  padding: 0 3rem;
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  grid-template-areas:
+    "address deliver-to"
+    "address price-details";
+}
+
+.delivery-address {
+  grid-area: address;
+  width: 80%;
+}
+
+.price-details {
+  grid-area: price-details;
+  margin-left: 2rem;
+  margin-bottom: 2rem;
+}
+
+.price-details > button {
+  max-width: none;
+  width: 100%;
+}
+
+.address-title {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.deliver-to {
+  grid-area: deliver-to;
+}
+
+.checkout-item-list > * {
+  margin-bottom: 1rem;
+}
+
+.checkout-item-details {
+  display: flex;
+  justify-content: space-between;
+}
+
+.selected-address > * {
+  margin-bottom: 1rem;
+}
+
+@media only screen and (max-width: 768px) {
+  .checkout-container {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "address"
+      "deliver-to"
+      "price-details";
+  }
+
+  .delivery-address {
+    width: 100%;
+  }
+}

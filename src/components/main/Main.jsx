@@ -4,7 +4,7 @@ import { ProductCard } from "../productCard/productCard";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useProducts } from "../../context/product-context";
-import { initialState } from "../../reducer/filterReducer";
+import { initialState } from "../../reducer/globalReducer";
 function Main() {
   const { dispatch, filteredData } = useProducts();
 

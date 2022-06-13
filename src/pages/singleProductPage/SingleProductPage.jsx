@@ -86,7 +86,7 @@ function SingleProductPage() {
                   ) : (
                     <button
                       className="btn btn-secondary mr-sm"
-                      onClick={(event) => addToCart(event, singleProduct)}
+                      onClick={() => addToCart(singleProduct)}
                     >
                       Add to Cart
                     </button>
@@ -121,7 +121,7 @@ function SingleProductPage() {
                 ) : (
                   <button
                     className="btn btn-secondary-outline mr-sm "
-                    onClick={(event) => addToWishList(event, singleProduct)}
+                    onClick={() => addToWishList(singleProduct)}
                   >
                     Add to WishList
                   </button>
