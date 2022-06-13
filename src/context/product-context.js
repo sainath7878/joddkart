@@ -68,8 +68,7 @@ function ProductsProvider({ children }) {
                 toast.success("Item added to cart");
             }
         } catch (err) {
-            console.log(err);
-            // toast.error(err.response.data.errors[0]);
+            toast.error(err.response.data.errors[0]);
         }
     };
 

@@ -52,7 +52,7 @@ function CheckOut() {
     if (cart && cart.length === 0) {
       navigate("/products");
     }
-  }, []);
+  }, [cart]);
 
   useEffect(() => {
     if (
